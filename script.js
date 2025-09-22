@@ -157,15 +157,21 @@ class CVApp {
     }
 
     switchToEnglish() {
-        // This would typically load the English version
-        // For now, we'll just update the interface text
-        console.log('Switching to English version');
+        // Redirect to English version
+        const currentUrl = window.location.href;
+        if (!currentUrl.includes('index-en.html')) {
+            const englishUrl = currentUrl.replace('index.html', 'index-en.html');
+            window.location.href = englishUrl;
+        }
     }
 
     switchToSpanish() {
-        // This would typically load the Spanish version
-        // For now, we'll just update the interface text
-        console.log('Switching to Spanish version');
+        // Redirect to Spanish version
+        const currentUrl = window.location.href;
+        if (!currentUrl.includes('index.html') || currentUrl.includes('index-en.html')) {
+            const spanishUrl = currentUrl.replace('index-en.html', 'index.html');
+            window.location.href = spanishUrl;
+        }
     }
 
     handleNavigation(e) {
