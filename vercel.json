@@ -1,9 +1,13 @@
 {
   "version": 2,
+  "name": "cv-salomon-ramirez",
   "builds": [
     {
-      "src": "**/*",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "public"
+      }
     }
   ],
   "routes": [
@@ -34,10 +38,16 @@
       "dest": "/index.html"
     }
   ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        },
         {
           "key": "X-Frame-Options",
           "value": "DENY"
@@ -57,22 +67,11 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     }
   ],
   "regions": ["iad1"],
-  "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
-    }
-  ]
+  "trailingSlash": false
 }

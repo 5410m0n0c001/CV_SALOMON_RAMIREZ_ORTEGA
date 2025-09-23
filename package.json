@@ -1,0 +1,27 @@
+{
+  "name": "cv-salomon-ramirez",
+  "version": "1.0.0",
+  "description": "Professional CV Website - Salomón Ramírez Ortega",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "vercel-build": "mkdir -p public && cp -r *.html *.css *.js *.png *.pdf public/ 2>/dev/null || echo 'Build completed'"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "cv",
+    "portfolio",
+    "resume",
+    "static-site",
+    "vite"
+  ],
+  "author": "Salomón Ramírez Ortega",
+  "license": "MIT"
+}
