@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,14 @@
     <meta name="author" content="Salomón Ramírez Ortega">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#4a90e2">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="CV - Salomón Ramírez Ortega">
+    <meta name="application-name" content="CV - Salomón Ramírez Ortega">
+    <meta name="msapplication-TileColor" content="#4a90e2">
+    <meta name="msapplication-config" content="/browserconfig.xml">
     <meta property="og:title" content="Salomón Ramírez Ortega - Professional CV">
     <meta property="og:description" content="Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development">
     <meta property="og:type" content="website">
@@ -53,8 +61,8 @@
     </style>
 
     <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="preload" href="./styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./styles.css"></noscript>
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
 
     <!-- Resource hints for better performance -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -62,7 +70,7 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="./alex.png" as="image" type="image/png" id="profile-image-preload">
+    <link rel="preload" href="alex.png" as="image" type="image/png" fetchpriority="high">
 
     <!-- Font preloading for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,6 +81,21 @@
     <!-- Font Awesome loaded asynchronously -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Service Worker for offline functionality -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                })
+                .catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        });
+    }
+    </script>
 
     <!-- Fallback inline critical CSS for testing -->
     <style>
@@ -103,12 +126,15 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="cv-container">
         <!-- Header Section -->
         <header class="cv-header">
             <div class="header-content">
                 <div class="profile-image">
-                    <img src="./alex.png" alt="Salomón Ramírez Ortega" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNGE5MGUyIiByeD0iNzUiLz4KPHRleHQgeD0iNzUiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5TUjwvdGV4dD4KPC9zdmc+'; this.style.background='linear-gradient(135deg, #4a90e2 0%, #357abd 100%)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontSize='3rem'; this.style.fontWeight='bold';" loading="eager" decoding="sync" width="150" height="150">
+                    <img src="alex.png" alt="Salomón Ramírez Ortega - Professional Profile Photo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNGE5MGUyIiByeD0iNzUiLz4KPHRleHQgeD0iNzUiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5TUjwvdGV4dD4KPC9zdmc+'; this.style.background='linear-gradient(135deg, #4a90e2 0%, #357abd 100%)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontSize='3rem'; this.style.fontWeight='bold';" loading="eager" decoding="async" width="150" height="150" fetchpriority="high">
                 </div>
                 <div class="header-info">
                     <h1>Salomón Ramírez Ortega</h1>
@@ -124,15 +150,15 @@
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-linkedin"></i>
-                            <a href="https://www.linkedin.com/in/salomon-ramirez-ortega-b8988a329/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            <a href="https://www.linkedin.com/in/salomon-ramirez-ortega-b8988a329/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile (opens in new tab)">LinkedIn</a>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-github"></i>
-                            <a href="https://github.com/5410m0n0c001/CV_SALOMON_RAMIREZ_ORTEGA" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://github.com/5410m0n0c001" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile (opens in new tab)">GitHub</a>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-globe"></i>
-                            <a href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/" target="_blank" rel="noopener noreferrer">Website</a>
+                            <a href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit personal website (opens in new tab)">Website</a>
                         </div>
                     </div>
                 </div>
@@ -166,7 +192,7 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="cv-main" role="main">
+        <main id="main-content" class="cv-main" role="main">
             <!-- Professional Profile -->
             <section id="profile-en" class="cv-section" aria-labelledby="profile-en-title">
                 <div class="section-header" role="button" tabindex="0" aria-expanded="true" aria-controls="profile-en-content">
@@ -403,6 +429,60 @@
             </section>
         </main>
     </div>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Salomón Ramírez Ortega",
+      "alternateName": "Salomon Ramirez Ortega",
+      "description": "Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development",
+      "image": "https://cv-salomon-ramirez-ortega-clbp.vercel.app/alex.png",
+      "url": "https://cv-salomon-ramirez-ortega-clbp.vercel.app/en",
+      "sameAs": [
+        "https://www.linkedin.com/in/salomon-ramirez-ortega-b8988a329/",
+        "https://github.com/5410m0n0c001/CV_SALOMON_RAMIREZ_ORTEGA",
+        "https://salomonramirezortega.quantumdigitalgroup.net"
+      ],
+      "jobTitle": "Technology Advisor",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Graduño Abogados"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MX",
+        "addressRegion": "Morelos"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+52-777-238-3264",
+        "email": "5410m0n.r4m1r3z@gmail.com",
+        "contactType": "professional"
+      },
+      "knowsAbout": [
+        "Digital Marketing",
+        "Cybersecurity",
+        "Web Development",
+        "Data Analysis",
+        "Programming",
+        "Project Management"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Technology Professional",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Cuernavaca, Morelos, Mexico"
+        }
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "UTEZ"
+      }
+    }
+    </script>
 
     <!-- JavaScript loaded with defer for better performance -->
     <script src="script.js" defer></script>
