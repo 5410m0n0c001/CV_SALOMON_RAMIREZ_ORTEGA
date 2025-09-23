@@ -657,8 +657,8 @@ body {
 
     .cv-header {
         background: #4a90e2 !important;
+        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        color-adjust: exact;
     }
 
     .download-section,
@@ -680,14 +680,14 @@ body {
 
     .skill-bar {
         background: #f0f0f0 !important;
+        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        color-adjust: exact;
     }
 
     .skill-fill {
         background: #4a90e2 !important;
+        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        color-adjust: exact;
     }
 }
 
@@ -759,6 +759,10 @@ body {
 
 /* Optimize font loading */
 @font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
     font-display: swap;
 }
 
@@ -826,6 +830,17 @@ select {
         /* Disable animations for print */
         animation-duration: 0s !important;
         transition-duration: 0s !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .cv-container {
+        box-shadow: none;
+        border: none;
     }
 }
 

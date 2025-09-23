@@ -279,21 +279,13 @@ class CVApp {
     }
 
     switchToEnglish() {
-        // Redirect to English version
-        const currentUrl = window.location.href;
-        if (!currentUrl.includes('index-en.html')) {
-            const englishUrl = currentUrl.replace('index.html', 'index-en.html');
-            window.location.href = englishUrl;
-        }
+        // Redirect to English version for static deployment
+        window.location.href = './index-en.html';
     }
 
     switchToSpanish() {
-        // Redirect to Spanish version
-        const currentUrl = window.location.href;
-        if (!currentUrl.includes('index.html') || currentUrl.includes('index-en.html')) {
-            const spanishUrl = currentUrl.replace('index-en.html', 'index.html');
-            window.location.href = spanishUrl;
-        }
+        // Redirect to Spanish version for static deployment
+        window.location.href = './index.html';
     }
 
     handleNavigation(e) {
