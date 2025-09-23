@@ -101,6 +101,53 @@ A modern, interactive, and bilingual CV website built with HTML, CSS, and JavaSc
    - Output Directory: `./`
    - Install Command: Leave empty
 
+### Vercel Deployment Troubleshooting
+
+#### Common Issues & Solutions
+
+**1. Images Not Loading**
+- **Problem**: Profile image shows broken link in Vercel
+- **Solution**: The application now includes automatic path detection and fallback mechanisms
+- **Verification**: Check browser console for asset loading logs
+
+**2. Language Toggle Not Working**
+- **Problem**: Language switching fails in production
+- **Solution**: Enhanced JavaScript with proper URL routing and error handling
+- **Verification**: Test both `/` → `/en` and `/en` → `/` transitions
+
+**3. Collapsible Sections Not Functioning**
+- **Problem**: Section toggles don't work in Vercel environment
+- **Solution**: Improved event handling with fallbacks and error boundaries
+- **Verification**: Test all section headers for proper expand/collapse
+
+**4. JavaScript Errors**
+- **Problem**: Console errors in production environment
+- **Solution**: Comprehensive error handling and graceful degradation
+- **Verification**: Check browser console for any JavaScript errors
+
+#### Asset Path Resolution
+
+The application automatically detects the environment and uses appropriate paths:
+
+```javascript
+// Local Development (localhost)
+./alex.png
+./script.js
+./styles.css
+
+// Vercel Production
+/alex.png
+/script.js
+/styles.css
+```
+
+#### Performance Optimization
+
+- **Static Asset Caching**: 1-year cache headers for images, CSS, JS
+- **CDN Distribution**: Global content delivery via Vercel's edge network
+- **Compression**: Automatic gzip/Brotli compression
+- **Image Optimization**: Responsive images with proper sizing attributes
+
 ### Manual Deployment
 
 1. **Upload** all files to your web server
@@ -152,12 +199,25 @@ The language toggle functionality works through:
 - **Mobile Browsers**: iOS Safari 12+, Chrome Mobile 60+
 - **Legacy Support**: Graceful degradation for older browsers with polyfills and fallbacks
 
-## ✨ Recent Improvements (v2.0)
+## ✨ Recent Improvements (v2.1)
+
+### Vercel Deployment Fixes
+- **Asset Path Resolution**: Dynamic path handling for both local and Vercel environments
+- **Image Loading**: Robust image loading with fallback mechanisms for Vercel deployment
+- **JavaScript Compatibility**: Enhanced error handling for Vercel-specific issues
+- **Configuration Optimization**: Improved vercel.json for better static asset handling
 
 ### Critical Bug Fixes
-- **Image Display**: Fixed case sensitivity issues with profile image loading
+- **Image Display**: Fixed case sensitivity issues with profile image loading in Vercel
 - **Accordion Functionality**: Enhanced section toggling with better error handling and fallbacks
-- **Language Toggle**: Improved reliability and state management
+- **Language Toggle**: Improved reliability and state management for production
+- **Asset Loading**: Added comprehensive fallback system for missing assets
+
+### Deployment-Specific Enhancements
+- **Path Helper Function**: Automatic detection of local vs production environment
+- **Asset Fallback System**: Graceful degradation when assets fail to load
+- **Vercel Configuration**: Optimized routing and caching for static assets
+- **Error Boundaries**: Enhanced error handling for production environment
 
 ### Performance Enhancements
 - **Critical CSS Inlining**: Above-the-fold styles inlined for faster First Paint
@@ -217,6 +277,47 @@ The language toggle functionality works through:
 - **Total Blocking Time**: < 200ms (optimized with lazy loading)
 - **Core Web Vitals**: All metrics in "Good" range
 
+## 🔧 Vercel-Specific Implementation Details
+
+### Asset Path Management
+```javascript
+// Dynamic path resolution based on environment
+window.getAssetPath = function(filename) {
+    const isLocal = window.location.hostname === 'localhost' ||
+                   window.location.hostname === '127.0.0.1' ||
+                   window.location.hostname === '0.0.0.0';
+
+    return isLocal ? `./${filename}` : `/${filename}`;
+};
+```
+
+### Enhanced Error Handling
+```javascript
+// Asset loading with fallback mechanism
+loadAssetWithFallback(primarySrc, fallbackSrc, element) {
+    const img = new Image();
+    img.onload = () => element.src = primarySrc;
+    img.onerror = () => {
+        console.warn(`Asset failed: ${primarySrc}, using fallback`);
+        element.src = fallbackSrc;
+    };
+    img.src = primarySrc;
+}
+```
+
+### Vercel Configuration Features
+- **Static Asset Optimization**: Proper MIME types and caching headers
+- **Route Handling**: Clean URLs with proper redirects
+- **Security Headers**: Comprehensive security headers for production
+- **CDN Optimization**: Global edge caching for better performance
+
+### Production Environment Detection
+The application automatically detects the deployment environment and adjusts behavior accordingly:
+- **Local Development**: Uses relative paths (`./assets/...`)
+- **Vercel Production**: Uses absolute paths (`/assets/...`)
+- **Error Handling**: Graceful fallbacks for missing assets
+- **Performance**: Optimized loading strategies per environment
+
 ## 🧪 Testing & Validation
 
 ### Automated Testing
@@ -227,14 +328,31 @@ The language toggle functionality works through:
 - **Cross-browser Testing**: BrowserStack compatibility testing
 
 ### Manual Testing Checklist
+
+#### Core Functionality
 - [ ] Language toggle functionality (Spanish ↔ English)
 - [ ] Section accordion toggles (all sections)
 - [ ] PDF download functionality (both languages)
 - [ ] Responsive design (mobile, tablet, desktop)
+
+#### Accessibility
 - [ ] Keyboard navigation (Tab, Enter, Escape keys)
 - [ ] Screen reader compatibility
+- [ ] Focus management and visual indicators
+- [ ] Color contrast compliance
+
+#### Production/Deployment
+- [ ] Image loading in Vercel environment
+- [ ] Asset path resolution (local vs production)
+- [ ] JavaScript functionality in production
+- [ ] Language switching in deployed environment
+- [ ] Section toggles in deployed environment
+
+#### Additional Features
 - [ ] Print functionality
 - [ ] External link security (noopener noreferrer)
+- [ ] Error handling and fallbacks
+- [ ] Performance optimization
 
 ### Performance Testing
 - [ ] First Contentful Paint < 1.5s
