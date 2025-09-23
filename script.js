@@ -7,21 +7,6 @@ class CVApp {
         this.init();
     }
 
-    // Helper function to get correct asset paths for both local and Vercel deployment
-    getAssetPath(filename) {
-        // Handle both local development and Vercel deployment
-        const isLocal = window.location.hostname === 'localhost' ||
-                       window.location.hostname === '127.0.0.1' ||
-                       window.location.hostname === '0.0.0.0';
-
-        if (isLocal) {
-            return `./${filename}`;
-        } else {
-            // In Vercel, assets are served from root
-            return `/${filename}`;
-        }
-    }
-
     // Enhanced asset loading with fallback
     loadAssetWithFallback(primarySrc, fallbackSrc, element) {
         const img = new Image();
@@ -57,7 +42,7 @@ class CVApp {
             // Initialize profile image with fallback
             const profileImage = document.querySelector('.profile-image img');
             if (profileImage) {
-                const primarySrc = this.getAssetPath('alex.png');
+                const primarySrc = 'alex.png';
                 const fallbackSrc = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNGE5MGUyIiByeD0iNzUiLz4KPHRleHQgeD0iNzUiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5TUjwvdGV4dD4KPC9zdmc+';
 
                 this.loadAssetWithFallback(primarySrc, fallbackSrc, profileImage);
@@ -404,15 +389,15 @@ class CVApp {
 
         // Determine current page and target language
         const currentPath = window.location.pathname;
-        const isCurrentlyEnglish = currentPath.includes('index-en.html') || currentPath.endsWith('/en');
+        const isCurrentlyEnglish = currentPath.includes('/en') || currentPath.includes('index-en.html');
 
         // Navigate to target language page
         if (isCurrentlyEnglish) {
             // Currently on English page, switch to Spanish
-            window.location.href = './index.html';
+            window.location.href = '/';
         } else {
             // Currently on Spanish page, switch to English
-            window.location.href = './index-en.html';
+            window.location.href = '/en';
         }
     }
 

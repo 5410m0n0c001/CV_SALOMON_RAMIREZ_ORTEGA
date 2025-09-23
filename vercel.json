@@ -1,53 +1,39 @@
 {
   "version": 2,
-  "name": "cv-salomon-ramirez",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "public"
-      }
+      "src": "*.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/assets/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|webp|pdf))",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable",
-        "x-content-type-options": "nosniff",
-        "x-compress-hint": "on"
-      }
+      "dest": "/$1"
     },
     {
       "src": "/en",
-      "dest": "/index-en.html"
+      "dest": "/index-en.html",
+      "headers": {
+        "Cache-Control": "public, max-age=3600"
+      }
     },
     {
       "src": "/es",
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=3600"
+      }
     },
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "public",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        },
         {
           "key": "X-Frame-Options",
           "value": "DENY"
@@ -55,23 +41,10 @@
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     }
   ],
-  "regions": ["iad1"],
   "cleanUrls": true,
   "trailingSlash": false
 }

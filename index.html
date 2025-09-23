@@ -404,39 +404,8 @@
         </main>
     </div>
 
-    <!-- Asset path helper for Vercel compatibility -->
-    <script>
-        // Global asset path helper function
-        window.getAssetPath = function(filename) {
-            const isLocal = window.location.hostname === 'localhost' ||
-                           window.location.hostname === '127.0.0.1' ||
-                           window.location.hostname === '0.0.0.0';
-
-            if (isLocal) {
-                return `./${filename}`;
-            } else {
-                return `/${filename}`;
-            }
-        };
-
-        // Update asset paths for Vercel compatibility
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update preload link
-            const preloadLink = document.getElementById('profile-image-preload');
-            if (preloadLink) {
-                preloadLink.href = window.getAssetPath('alex.png');
-            }
-
-            // Update image source
-            const profileImage = document.querySelector('.profile-image img');
-            if (profileImage) {
-                profileImage.src = window.getAssetPath('alex.png');
-            }
-        });
-    </script>
-
     <!-- JavaScript loaded with defer for better performance -->
-    <script src="./script.js" defer></script>
+    <script src="script.js" defer></script>
 
     <!-- CSS Loading Debug Script -->
     <script>

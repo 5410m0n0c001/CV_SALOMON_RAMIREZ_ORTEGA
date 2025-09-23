@@ -90,16 +90,17 @@ A modern, interactive, and bilingual CV website built with HTML, CSS, and JavaSc
 
 ## 🚀 Deployment
 
-### Vercel Deployment (Recommended)
+### Vercel Deployment (Recommended) - Zero Configuration
 
 1. **Fork or Clone** this repository
 2. **Connect** to Vercel:
    - Import the project to Vercel
-   - Auto-deployment will be configured
-3. **Configure** build settings:
-   - Build Command: Leave empty (static site)
-   - Output Directory: `./`
-   - Install Command: Leave empty
+   - **Zero configuration needed** - static site deployment
+3. **Deploy** automatically:
+   - Framework: Static HTML (auto-detected)
+   - Build Command: (Empty - no build process)
+   - Output Directory: (Empty - serves from root)
+   - Install Command: (Empty - no dependencies)
 
 ### Vercel Deployment Troubleshooting
 
@@ -199,25 +200,25 @@ The language toggle functionality works through:
 - **Mobile Browsers**: iOS Safari 12+, Chrome Mobile 60+
 - **Legacy Support**: Graceful degradation for older browsers with polyfills and fallbacks
 
-## ✨ Recent Improvements (v2.1)
+## ✨ Recent Improvements (v2.2) - Zero Configuration
 
-### Vercel Deployment Fixes
-- **Asset Path Resolution**: Dynamic path handling for both local and Vercel environments
-- **Image Loading**: Robust image loading with fallback mechanisms for Vercel deployment
-- **JavaScript Compatibility**: Enhanced error handling for Vercel-specific issues
-- **Configuration Optimization**: Improved vercel.json for better static asset handling
+### Simplified Static Site Deployment
+- **Zero Build Process**: Eliminated complex build configurations for static deployment
+- **Direct Asset Serving**: Simple relative paths for all assets (images, CSS, JS)
+- **Vercel Auto-Detection**: Automatic framework detection as static HTML site
+- **Streamlined Configuration**: Minimal vercel.json with essential routing only
 
 ### Critical Bug Fixes
-- **Image Display**: Fixed case sensitivity issues with profile image loading in Vercel
-- **Accordion Functionality**: Enhanced section toggling with better error handling and fallbacks
-- **Language Toggle**: Improved reliability and state management for production
-- **Asset Loading**: Added comprehensive fallback system for missing assets
+- **Image Display**: Fixed case sensitivity issues with profile image loading
+- **Accordion Functionality**: Enhanced section toggling with better error handling
+- **Language Toggle**: Improved reliability with simplified URL routing
+- **Asset Loading**: Robust fallback system for missing assets
 
-### Deployment-Specific Enhancements
-- **Path Helper Function**: Automatic detection of local vs production environment
-- **Asset Fallback System**: Graceful degradation when assets fail to load
-- **Vercel Configuration**: Optimized routing and caching for static assets
-- **Error Boundaries**: Enhanced error handling for production environment
+### Deployment Optimizations
+- **Static Site Optimization**: Perfect configuration for HTML/CSS/JS sites
+- **Root-Level Deployment**: Files served directly from repository root
+- **Simple Routing**: Clean URL routing for Spanish/English versions
+- **Essential Security**: Core security headers without complexity
 
 ### Performance Enhancements
 - **Critical CSS Inlining**: Above-the-fold styles inlined for faster First Paint
@@ -277,23 +278,11 @@ The language toggle functionality works through:
 - **Total Blocking Time**: < 200ms (optimized with lazy loading)
 - **Core Web Vitals**: All metrics in "Good" range
 
-## 🔧 Vercel-Specific Implementation Details
+## 🔧 Static Site Implementation Details
 
-### Asset Path Management
+### Asset Loading with Fallbacks
 ```javascript
-// Dynamic path resolution based on environment
-window.getAssetPath = function(filename) {
-    const isLocal = window.location.hostname === 'localhost' ||
-                   window.location.hostname === '127.0.0.1' ||
-                   window.location.hostname === '0.0.0.0';
-
-    return isLocal ? `./${filename}` : `/${filename}`;
-};
-```
-
-### Enhanced Error Handling
-```javascript
-// Asset loading with fallback mechanism
+// Robust asset loading with error handling
 loadAssetWithFallback(primarySrc, fallbackSrc, element) {
     const img = new Image();
     img.onload = () => element.src = primarySrc;
@@ -305,20 +294,40 @@ loadAssetWithFallback(primarySrc, fallbackSrc, element) {
 }
 ```
 
-### Vercel Configuration Features
-- **Static Asset Optimization**: Proper MIME types and caching headers
-- **Route Handling**: Clean URLs with proper redirects
-- **Security Headers**: Comprehensive security headers for production
-- **CDN Optimization**: Global edge caching for better performance
+### Language Toggle System
+```javascript
+// Simple and reliable language switching
+toggleLanguage() {
+    const currentPath = window.location.pathname;
+    const isCurrentlyEnglish = currentPath.includes('/en');
+    
+    if (isCurrentlyEnglish) {
+        window.location.href = '/';  // Switch to Spanish
+    } else {
+        window.location.href = '/en';  // Switch to English
+    }
+}
+```
 
-### Production Environment Detection
-The application automatically detects the deployment environment and adjusts behavior accordingly:
-- **Local Development**: Uses relative paths (`./assets/...`)
-- **Vercel Production**: Uses absolute paths (`/assets/...`)
-- **Error Handling**: Graceful fallbacks for missing assets
-- **Performance**: Optimized loading strategies per environment
+### Zero Configuration Benefits
+- **Framework Auto-Detection**: Vercel automatically detects static HTML
+- **No Build Process**: Files served directly from repository
+- **Simple Routing**: Clean URLs for both language versions
+- **Essential Security**: Core security headers for production
 
 ## 🧪 Testing & Validation
+
+### Local Testing
+```bash
+# Simple static server (Python)
+python3 -m http.server 3000
+
+# Alternative (Node.js)
+npx serve .
+
+# Alternative (PHP)
+php -S localhost:3000
+```
 
 ### Automated Testing
 - **Lighthouse CI**: Continuous performance monitoring
