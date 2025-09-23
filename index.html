@@ -28,6 +28,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Fallback inline critical CSS for testing -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+        .cv-container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; padding: 20px; }
+        .cv-header { background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; padding: 40px 30px; border-radius: 15px; margin-bottom: 30px; }
+        .header-content { display: flex; align-items: center; gap: 30px; }
+        .profile-image img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid rgba(255, 255, 255, 0.3); object-fit: cover; }
+        .header-info h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .contact-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
+        .contact-item a { color: white; text-decoration: none; }
+        .cv-section { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); margin-bottom: 30px; overflow: hidden; }
+        .section-header { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px 25px; cursor: pointer; display: flex; align-items: center; gap: 15px; }
+        .section-header h2 { flex: 1; font-size: 1.5rem; font-weight: 600; color: #2c3e50; }
+        .section-content { padding: 25px; max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .section-content.show { max-height: 5000px; }
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .skill-item { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+        .skill-bar { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%); border-radius: 4px; }
+        .download-section { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        .download-btn { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .cv-nav { background: #34495e; border-radius: 10px; margin-bottom: 30px; }
+        .cv-nav ul { list-style: none; display: flex; flex-wrap: wrap; padding: 0; margin: 0; }
+        .nav-link { display: flex; align-items: center; gap: 10px; padding: 15px 20px; color: white; text-decoration: none; font-weight: 500; border-radius: 10px; margin: 5px; }
+        @media (max-width: 768px) { .header-content { flex-direction: column; text-align: center; } .profile-image img { width: 120px; height: 120px; } .contact-info { grid-template-columns: 1fr; } .download-section { flex-direction: column; } .cv-nav ul { flex-direction: column; } .skills-container { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
     <div class="cv-container">
@@ -332,5 +360,27 @@
     </div>
 
     <script src="./script.js"></script>
+
+    <!-- CSS Loading Debug Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const link = document.querySelector('link[rel="stylesheet"]');
+        if (link) {
+            console.log('CSS link found:', link.href);
+            link.onload = () => console.log('CSS loaded successfully');
+            link.onerror = () => console.error('CSS failed to load from:', link.href);
+        } else {
+            console.error('No CSS link element found');
+        }
+
+        // Check if styles are applied
+        const cvContainer = document.querySelector('.cv-container');
+        if (cvContainer) {
+            console.log('CV container found - styles likely loaded');
+        } else {
+            console.error('CV container not found - styles not applied');
+        }
+    });
+    </script>
 </body>
 </html>
