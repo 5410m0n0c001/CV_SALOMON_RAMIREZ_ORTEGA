@@ -5,12 +5,22 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: #333;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
+    /* Performance optimizations */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: auto;
 }
 
 .cv-container {
@@ -33,6 +43,12 @@ body {
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
+    /* Performance optimizations */
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .cv-header::before {
@@ -67,6 +83,12 @@ body {
     transition: transform 0.3s ease;
     background: rgba(255, 255, 255, 0.1);
     display: block;
+    /* Performance optimizations */
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Fallback for when image fails to load */
@@ -116,6 +138,12 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     transition: all 0.3s ease;
+    /* Performance optimizations */
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .contact-item:hover {
@@ -249,6 +277,12 @@ body {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     transition: all 0.3s ease;
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .cv-section:hover {
@@ -303,12 +337,29 @@ body {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+    /* Performance optimizations */
+    will-change: max-height, padding;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .section-content.show {
     padding: 25px;
-    max-height: 2000px;
+    max-height: 5000px; /* Increased from 2000px to handle more content */
+    overflow: visible;
+}
+
+/* Ensure content containers have proper text wrapping */
+.section-content p,
+.section-content span,
+.section-content div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.6;
 }
 
 /* Experience Styles */
@@ -380,6 +431,19 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure skills section content is fully contained */
+.skills-container .skills-category {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skill-list {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .skills-category h3 {
@@ -400,11 +464,24 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.4;
 }
 
 .skill-item span {
     font-weight: 500;
     color: #495057;
+    display: block;
+    width: 100%;
+}
+
+/* Ensure skill text doesn't get cut off */
+.skill-item span {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .skill-bar {
@@ -422,6 +499,12 @@ body {
     border-radius: 4px;
     transition: width 1s ease-in-out;
     position: relative;
+    /* Performance optimizations */
+    will-change: width;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .skill-fill::after {
@@ -611,20 +694,42 @@ body {
 /* Animation Classes */
 .fade-in {
     animation: fadeIn 0.5s ease-in;
+    /* Performance optimizations */
+    will-change: opacity, transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .slide-in {
     animation: slideIn 0.3s ease-out;
+    /* Performance optimizations */
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 @keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
 /* Accessibility */
@@ -633,6 +738,104 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* Performance optimizations for production */
+.cv-container,
+.cv-header,
+.cv-section,
+.section-content,
+.skill-fill,
+.contact-item,
+.nav-link,
+.download-btn {
+    /* Optimize rendering */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Optimize font loading */
+@font-face {
+    font-display: swap;
+}
+
+/* Critical path optimizations */
+body {
+    /* Ensure smooth scrolling */
+    scroll-behavior: smooth;
+}
+
+/* Optimize GPU acceleration for complex animations */
+.skill-fill::after,
+.section-header .section-icon,
+.contact-item,
+.nav-link {
+    will-change: transform;
+}
+
+/* Production error handling */
+img {
+    /* Fallback for broken images */
+    background-color: #f0f0f0;
+}
+
+/* Additional performance optimizations */
+* {
+    /* Optimize box-sizing calculations */
+    box-sizing: border-box;
+}
+
+/* Optimize layout calculations */
+.cv-container,
+.cv-header,
+.cv-main,
+.cv-section {
+    /* Use transform3d for better performance */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Optimize scrolling performance */
+html {
+    scroll-behavior: smooth;
+    /* Improve scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize font rendering */
+body,
+button,
+input,
+textarea,
+select {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Critical rendering path optimizations */
+.head {
+    display: block;
+}
+
+/* Optimize for print media */
+@media print {
+    * {
+        /* Disable animations for print */
+        animation-duration: 0s !important;
+        transition-duration: 0s !important;
+    }
+}
+
+/* Optimize for mobile performance */
+@media (max-width: 768px) {
+    .cv-section,
+    .contact-item,
+    .nav-link {
+        /* Reduce animations on mobile for better performance */
+        will-change: auto;
     }
 }
 
@@ -713,6 +916,63 @@ a:focus,
 .education-item:hover h3 {
     color: #4a90e2;
     transition: color 0.3s ease;
+}
+
+/* Content container improvements */
+.section-content {
+    box-sizing: border-box;
+}
+
+.section-content p,
+.section-content span,
+.section-content div {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Responsive text handling */
+@media (max-width: 768px) {
+    .section-content.show {
+        padding: 20px 15px;
+    }
+
+    .skill-item span {
+        font-size: 0.9rem;
+        line-height: 1.3;
+    }
+
+    .experience-item,
+    .education-item {
+        padding: 15px;
+    }
+
+    .experience-item h3,
+    .education-item h3 {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-content.show {
+        padding: 15px 10px;
+    }
+
+    .skill-item span {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+
+    .experience-item h3,
+    .education-item h3 {
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .experience-item,
+    .education-item {
+        padding: 12px;
+    }
 }
 
 /* Progress bar animation on scroll */

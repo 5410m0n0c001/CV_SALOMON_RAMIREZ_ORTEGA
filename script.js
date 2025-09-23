@@ -2,45 +2,130 @@
 class CVApp {
     constructor() {
         this.currentLanguage = 'es';
+        this.observers = new Set();
+        this.eventListeners = new Map();
         this.init();
     }
 
     init() {
-        this.setupEventListeners();
-        this.initializeSections();
-        this.setupSmoothScroll();
-        this.addAnimationClasses();
+        try {
+            this.setupEventListeners();
+            this.initializeSections();
+            this.setupSmoothScroll();
+            this.addAnimationClasses();
+        } catch (error) {
+            console.error('Error initializing CV App:', error);
+            this.handleInitializationError(error);
+        }
+    }
+
+    handleInitializationError(error) {
+        // Fallback functionality if initialization fails
+        console.warn('CV App initialization failed, using fallback mode');
+        // Ensure basic functionality works even if advanced features fail
+        this.setupBasicFunctionality();
+    }
+
+    setupBasicFunctionality() {
+        // Basic section toggling without advanced features
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        sectionHeaders.forEach(header => {
+            if (header && header.nextElementSibling) {
+                header.style.cursor = 'pointer';
+                header.addEventListener('click', (e) => {
+                    const content = header.nextElementSibling;
+                    if (content) {
+                        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+            }
+        });
     }
 
     setupEventListeners() {
-        // Language toggle
-        const langToggle = document.getElementById('lang-toggle');
-        if (langToggle) {
-            langToggle.addEventListener('click', () => this.toggleLanguage());
+        try {
+            // Language toggle with error handling
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) {
+                const langToggleHandler = (e) => {
+                    try {
+                        e.preventDefault();
+                        this.toggleLanguage();
+                    } catch (error) {
+                        console.error('Error in language toggle:', error);
+                    }
+                };
+                langToggle.addEventListener('click', langToggleHandler);
+                this.eventListeners.set('langToggle', langToggleHandler);
+            }
+
+            // Section toggles with null checks
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            sectionHeaders.forEach((header, index) => {
+                if (header && header.nextElementSibling) {
+                    const sectionToggleHandler = (e) => {
+                        try {
+                            e.preventDefault();
+                            this.toggleSection(e.target);
+                        } catch (error) {
+                            console.error('Error toggling section:', error);
+                        }
+                    };
+                    header.addEventListener('click', sectionToggleHandler);
+                    this.eventListeners.set(`sectionHeader_${index}`, sectionToggleHandler);
+                }
+            });
+
+            // Navigation links with error handling
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach((link, index) => {
+                if (link) {
+                    const navClickHandler = (e) => {
+                        try {
+                            e.preventDefault();
+                            this.handleNavigation(e);
+                        } catch (error) {
+                            console.error('Error in navigation:', error);
+                        }
+                    };
+                    link.addEventListener('click', navClickHandler);
+                    this.eventListeners.set(`navLink_${index}`, navClickHandler);
+                }
+            });
+
+            // Keyboard navigation with error handling
+            const keyboardHandler = (e) => {
+                try {
+                    this.handleKeyboard(e);
+                } catch (error) {
+                    console.error('Error in keyboard navigation:', error);
+                }
+            };
+            document.addEventListener('keydown', keyboardHandler);
+            this.eventListeners.set('keyboard', keyboardHandler);
+
+            // Window resize with debouncing and error handling
+            const resizeHandler = this.debounce(() => {
+                try {
+                    this.handleResize();
+                } catch (error) {
+                    console.error('Error in resize handler:', error);
+                }
+            }, 250);
+            window.addEventListener('resize', resizeHandler);
+            this.eventListeners.set('resize', resizeHandler);
+
+        } catch (error) {
+            console.error('Error setting up event listeners:', error);
         }
-
-        // Section toggles
-        const sectionHeaders = document.querySelectorAll('.section-header');
-        sectionHeaders.forEach(header => {
-            header.addEventListener('click', (e) => this.toggleSection(e.target));
-        });
-
-        // Navigation links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => this.handleNavigation(e));
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => this.handleKeyboard(e));
-
-        // Window resize
-        window.addEventListener('resize', () => this.handleResize());
     }
 
     initializeSections() {
-        // Start with profile section open
-        const profileSection = document.getElementById('profile-content');
+        // Start with profile section open - detect language and use appropriate ID
+        const currentUrl = window.location.href;
+        const isEnglish = currentUrl.includes('index-en.html');
+        const profileId = isEnglish ? 'profile-en-content' : 'profile-es-content';
+        const profileSection = document.getElementById(profileId);
         if (profileSection) {
             this.openSection(profileSection);
         }
@@ -86,49 +171,86 @@ class CVApp {
     }
 
     toggleSection(target) {
-        // Find the section header and content
-        const header = target.closest('.section-header');
-        const content = header.nextElementSibling;
+        try {
+            // Find the section header and content with null checks
+            const header = target?.closest('.section-header');
+            const content = header?.nextElementSibling;
 
-        if (!header || !content) return;
+            if (!header || !content) {
+                console.warn('Section header or content not found');
+                return;
+            }
 
-        const isOpen = content.classList.contains('show');
-        const toggleIcon = header.querySelector('.toggle-icon');
+            const isOpen = content.classList.contains('show');
+            const toggleIcon = header.querySelector('.toggle-icon');
 
-        if (isOpen) {
-            this.closeSection(content, toggleIcon);
-        } else {
-            this.openSection(content, toggleIcon);
+            if (isOpen) {
+                this.closeSection(content, toggleIcon);
+            } else {
+                this.openSection(content, toggleIcon);
+            }
+        } catch (error) {
+            console.error('Error toggling section:', error);
         }
     }
 
     openSection(content, toggleIcon = null) {
-        content.classList.add('show');
-        content.style.maxHeight = content.scrollHeight + 'px';
+        try {
+            if (!content) {
+                console.warn('Content element not provided to openSection');
+                return;
+            }
 
-        if (toggleIcon) {
-            toggleIcon.style.transform = 'rotate(180deg)';
-        }
+            content.classList.add('show');
 
-        // Add active class to header
-        const header = content.previousElementSibling;
-        if (header) {
-            header.classList.add('active');
+            // Use a slight delay to ensure content is fully rendered
+            setTimeout(() => {
+                if (content && content.scrollHeight) {
+                    const scrollHeight = content.scrollHeight;
+                    content.style.maxHeight = (scrollHeight + 50) + 'px'; // Add extra padding
+
+                    // Double-check after a longer delay for complex content like Skills
+                    setTimeout(() => {
+                        this.ensureContentVisible(content);
+                    }, 100);
+                }
+            }, 10);
+
+            if (toggleIcon) {
+                toggleIcon.style.transform = 'rotate(180deg)';
+            }
+
+            // Add active class to header
+            const header = content.previousElementSibling;
+            if (header) {
+                header.classList.add('active');
+            }
+        } catch (error) {
+            console.error('Error opening section:', error);
         }
     }
 
     closeSection(content, toggleIcon = null) {
-        content.classList.remove('show');
-        content.style.maxHeight = '0';
+        try {
+            if (!content) {
+                console.warn('Content element not provided to closeSection');
+                return;
+            }
 
-        if (toggleIcon) {
-            toggleIcon.style.transform = 'rotate(0deg)';
-        }
+            content.classList.remove('show');
+            content.style.maxHeight = '0';
 
-        // Remove active class from header
-        const header = content.previousElementSibling;
-        if (header) {
-            header.classList.remove('active');
+            if (toggleIcon) {
+                toggleIcon.style.transform = 'rotate(0deg)';
+            }
+
+            // Remove active class from header
+            const header = content.previousElementSibling;
+            if (header) {
+                header.classList.remove('active');
+            }
+        } catch (error) {
+            console.error('Error closing section:', error);
         }
     }
 
@@ -179,8 +301,15 @@ class CVApp {
         const href = e.target.getAttribute('href') || e.target.closest('a').getAttribute('href');
 
         if (href && href.startsWith('#')) {
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
+            const sectionId = href.substring(1);
+            // Determine the correct content ID based on the section ID
+            const currentUrl = window.location.href;
+            const isEnglish = currentUrl.includes('index-en.html');
+            const contentId = isEnglish ?
+                sectionId.replace('-en', '-en-content') :
+                sectionId.replace('-es', '-es-content');
+
+            const targetElement = document.getElementById(contentId);
 
             if (targetElement) {
                 // Close all other sections first
@@ -232,36 +361,120 @@ class CVApp {
         // Recalculate max-height for open sections on resize
         const openSections = document.querySelectorAll('.section-content.show');
         openSections.forEach(section => {
-            section.style.maxHeight = section.scrollHeight + 'px';
+            section.style.maxHeight = (section.scrollHeight + 50) + 'px';
         });
     }
 
-    downloadPDF(language) {
-        // PDF download functionality
-        const pdfFiles = {
-            spanish: 'SalomónRamírezOrtega.CV.2.0.pdf_2025_9_8 (1).pdf',
-            english: 'SALOMON_RAMIREZ_ORTEGA_CV_ENG.PDF'
-        };
+    // Utility method to ensure content is fully visible
+    ensureContentVisible(content) {
+        if (content && content.classList.contains('show')) {
+            const scrollHeight = content.scrollHeight;
+            const currentMaxHeight = parseInt(content.style.maxHeight) || 0;
 
-        const fileName = pdfFiles[language];
-        if (!fileName) {
-            console.error('PDF file not found for language:', language);
-            return;
+            // If content is larger than current max-height, update it
+            if (scrollHeight > currentMaxHeight) {
+                content.style.maxHeight = (scrollHeight + 50) + 'px';
+            }
         }
+    }
 
-        // Create download link
-        const link = document.createElement('a');
-        link.href = fileName;
-        link.download = fileName;
-        link.style.display = 'none';
+    downloadPDF(language) {
+        try {
+            // PDF download functionality with error handling
+            const pdfFiles = {
+                spanish: 'SalomónRamírezOrtega.CV.2.0.pdf_2025_9_8 (1).pdf',
+                english: 'SALOMON_RAMIREZ_ORTEGA_CV_ENG.PDF'
+            };
 
-        // Add to DOM, click, and remove
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+            const fileName = pdfFiles[language];
+            if (!fileName) {
+                console.error('PDF file not found for language:', language);
+                this.showErrorNotification('Archivo PDF no encontrado');
+                return;
+            }
 
-        // Show download feedback
-        this.showDownloadFeedback(language);
+            // Check if file exists (basic check)
+            if (typeof fetch !== 'undefined') {
+                fetch(fileName, { method: 'HEAD' })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`PDF file not accessible: ${response.status}`);
+                        }
+                        this.performDownload(fileName, language);
+                    })
+                    .catch(error => {
+                        console.error('Error checking PDF file:', error);
+                        // Fallback to direct download
+                        this.performDownload(fileName, language);
+                    });
+            } else {
+                // Fallback for browsers without fetch
+                this.performDownload(fileName, language);
+            }
+        } catch (error) {
+            console.error('Error in downloadPDF:', error);
+            this.showErrorNotification('Error al descargar el archivo');
+        }
+    }
+
+    performDownload(fileName, language) {
+        try {
+            // Create download link with security considerations
+            const link = document.createElement('a');
+            link.href = fileName;
+            link.download = fileName;
+            link.style.display = 'none';
+            link.rel = 'noopener noreferrer';
+
+            // Add to DOM, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Show download feedback
+            this.showDownloadFeedback(language);
+        } catch (error) {
+            console.error('Error performing download:', error);
+            this.showErrorNotification('Error al iniciar la descarga');
+        }
+    }
+
+    showErrorNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'error-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-in forwards';
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 4000);
     }
 
     showDownloadFeedback(language) {
@@ -328,41 +541,152 @@ class CVApp {
             }
         }
     }
+
+    // Cleanup method for proper memory management
+    cleanup() {
+        try {
+            // Clear all observers
+            this.observers.forEach(observer => {
+                if (observer && typeof observer.disconnect === 'function') {
+                    observer.disconnect();
+                }
+            });
+            this.observers.clear();
+
+            // Remove all event listeners
+            this.eventListeners.forEach((handler, key) => {
+                // Remove from appropriate elements based on key
+                if (key === 'keyboard') {
+                    document.removeEventListener('keydown', handler);
+                } else if (key === 'resize') {
+                    window.removeEventListener('resize', handler);
+                } else if (key.startsWith('sectionHeader_')) {
+                    // Section headers are already handled by the Map cleanup
+                } else if (key.startsWith('navLink_')) {
+                    // Navigation links are already handled by the Map cleanup
+                }
+            });
+            this.eventListeners.clear();
+
+            console.log('CV App cleaned up successfully');
+        } catch (error) {
+            console.error('Error during cleanup:', error);
+        }
+    }
+
+    // Safe external link handler
+    openExternalLink(url, target = '_blank') {
+        try {
+            if (!url || typeof url !== 'string') {
+                console.error('Invalid URL provided to openExternalLink');
+                return;
+            }
+
+            // Validate URL format
+            const urlPattern = /^https?:\/\/.+/i;
+            if (!urlPattern.test(url)) {
+                console.error('Invalid URL format:', url);
+                return;
+            }
+
+            // Create link with security attributes
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = target;
+            link.rel = 'noopener noreferrer';
+            link.style.display = 'none';
+
+            // Add to DOM, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+        } catch (error) {
+            console.error('Error opening external link:', error);
+            // Fallback: try opening in same window
+            try {
+                window.location.href = url;
+            } catch (fallbackError) {
+                console.error('Fallback navigation also failed:', fallbackError);
+            }
+        }
+    }
 }
 
 // Initialize the CV app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    const cvApp = new CVApp();
+    try {
+        const cvApp = new CVApp();
 
-    // Make downloadPDF function globally available
-    window.downloadPDF = (language) => cvApp.downloadPDF(language);
+        // Make CV app globally available for cleanup
+        window.cvApp = cvApp;
 
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
+        // Make downloadPDF function globally available with error handling
+        window.downloadPDF = (language) => {
+            try {
+                cvApp.downloadPDF(language);
+            } catch (error) {
+                console.error('Error in global downloadPDF function:', error);
             }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
+        };
+
+        // Make external link handler globally available
+        window.openExternalLink = (url, target = '_blank') => {
+            try {
+                cvApp.openExternalLink(url, target);
+            } catch (error) {
+                console.error('Error in global openExternalLink function:', error);
             }
-        }
+        };
 
-        .download-notification {
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
 
-        .notification-content i {
-            font-size: 1.1rem;
-        }
-    `;
-    document.head.appendChild(style);
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
 
-    console.log('CV Interactive App initialized successfully!');
+            .download-notification, .error-notification {
+                font-weight: 500;
+                font-size: 0.9rem;
+            }
+
+            .notification-content i {
+                font-size: 1.1rem;
+            }
+        `;
+        document.head.appendChild(style);
+
+        console.log('CV Interactive App initialized successfully!');
+    } catch (error) {
+        console.error('Error initializing CV App:', error);
+    }
+});
+
+// Cleanup method for proper memory management
+window.addEventListener('beforeunload', () => {
+    // Clean up observers and event listeners
+    if (window.cvApp) {
+        window.cvApp.cleanup();
+    }
 });
 
 // Export for potential module usage
