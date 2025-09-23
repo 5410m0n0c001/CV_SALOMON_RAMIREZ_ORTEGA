@@ -331,18 +331,32 @@ body {
 
 .section-header.active .toggle-icon {
     transform: rotate(180deg);
+    color: #4a90e2;
+}
+
+.section-header.active {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-bottom-color: #4a90e2;
+}
+
+.section-header.active .section-icon {
+    color: #4a90e2;
+    transform: scale(1.1);
 }
 
 .section-content {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease-in-out;
     /* Performance optimizations */
     will-change: max-height, padding;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Ensure smooth transitions */
+    transform: translateZ(0);
     backface-visibility: hidden;
 }
 
@@ -350,6 +364,8 @@ body {
     padding: 25px;
     max-height: 5000px; /* Increased from 2000px to handle more content */
     overflow: visible;
+    /* Ensure content is properly contained */
+    box-sizing: border-box;
 }
 
 /* Ensure content containers have proper text wrapping */
@@ -757,6 +773,60 @@ body {
     backface-visibility: hidden;
 }
 
+/* Cross-browser compatibility fixes */
+@supports not (display: grid) {
+    .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .contact-item {
+        flex: 1 1 250px;
+        min-width: 250px;
+    }
+
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .skills-category {
+        flex: 1 1 300px;
+        min-width: 300px;
+    }
+}
+
+/* Fallback for browsers without CSS Grid support */
+@supports not (display: grid) {
+    .cv-nav ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-link {
+        justify-content: center;
+    }
+}
+
+/* Fallback for older browsers without flexbox gap support */
+@supports not (gap: 1px) {
+    .header-content {
+        margin-bottom: 30px;
+    }
+
+    .contact-item {
+        margin-bottom: 15px;
+    }
+
+    .download-section {
+        margin-bottom: 30px;
+    }
+
+    .nav-link {
+        margin-bottom: 5px;
+    }
+}
+
 /* Optimize font loading */
 @font-face {
     font-family: 'Inter';
@@ -764,6 +834,35 @@ body {
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Preload critical resources */
+@supports (content-visibility: auto) {
+    .cv-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 200px;
+    }
+}
+
+/* Optimize layout stability */
+html {
+    scroll-padding-top: 20px;
+}
+
+/* Improve Core Web Vitals */
+.cv-container {
+    contain: layout style paint;
+}
+
+/* Optimize for better LCP */
+.profile-image img {
+    content-visibility: visible;
+}
+
+/* Reduce layout shifts */
+.skill-item {
+    contain: layout;
 }
 
 /* Critical path optimizations */
@@ -860,6 +959,31 @@ a:focus,
 .section-header:focus {
     outline: 2px solid #4a90e2;
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+}
+
+/* Enhanced focus for interactive elements */
+.section-header:focus {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-bottom-color: #4a90e2;
+}
+
+.nav-link:focus {
+    background: rgba(255, 255, 255, 0.15);
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+.download-btn:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+}
+
+.lang-btn:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
 }
 
 /* High contrast mode support */

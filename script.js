@@ -11,6 +11,7 @@ class CVApp {
         try {
             this.setupEventListeners();
             this.initializeSections();
+            this.initializeLanguageButton();
             this.setupSmoothScroll();
             this.addAnimationClasses();
         } catch (error) {
@@ -121,14 +122,66 @@ class CVApp {
     }
 
     initializeSections() {
-        // Start with profile section open - detect language and use appropriate ID
-        const currentUrl = window.location.href;
-        const isEnglish = currentUrl.includes('index-en.html');
-        const profileId = isEnglish ? 'profile-en-content' : 'profile-es-content';
-        const profileSection = document.getElementById(profileId);
-        if (profileSection) {
-            this.openSection(profileSection);
+        try {
+            // Start with profile section open - detect language and use appropriate ID
+            const currentUrl = window.location.href;
+            const isEnglish = currentUrl.includes('index-en.html');
+            const profileId = isEnglish ? 'profile-en-content' : 'profile-es-content';
+            const profileSection = document.getElementById(profileId);
+
+            if (profileSection) {
+                // Ensure only profile section is open initially
+                this.closeAllSections();
+
+                // Only open profile section if it's not already open
+                if (!profileSection.classList.contains('show')) {
+                    this.openSection(profileSection);
+                }
+            }
+
+            // Set up ARIA attributes for all section headers
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            sectionHeaders.forEach(header => {
+                const content = header.nextElementSibling;
+                if (content) {
+                    // Set initial ARIA attributes
+                    const isExpanded = content.classList.contains('show');
+                    header.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+                    header.setAttribute('aria-controls', content.id);
+                    content.setAttribute('aria-labelledby', header.querySelector('h2').id || 'section-title');
+                }
+            });
+        } catch (error) {
+            console.error('Error initializing sections:', error);
         }
+    }
+
+    initializeLanguageButton() {
+        try {
+            const langToggle = document.getElementById('lang-toggle');
+            if (!langToggle) return;
+
+            // Set correct button text based on current page
+            const currentPath = window.location.pathname;
+            const isEnglish = currentPath.includes('index-en.html') || currentPath.endsWith('/en');
+
+            // Button should show the target language (what you'll switch TO)
+            langToggle.textContent = isEnglish ? 'Español' : 'English';
+
+            // Update current language for internal tracking
+            this.currentLanguage = isEnglish ? 'en' : 'es';
+
+        } catch (error) {
+            console.error('Error initializing language button:', error);
+        }
+    }
+
+    // Helper method to close all sections
+    closeAllSections() {
+        const allSections = document.querySelectorAll('.section-content');
+        allSections.forEach(section => {
+            this.closeSection(section);
+        });
     }
 
     setupSmoothScroll() {
@@ -173,8 +226,18 @@ class CVApp {
     toggleSection(target) {
         try {
             // Find the section header and content with null checks
-            const header = target?.closest('.section-header');
-            const content = header?.nextElementSibling;
+            let header;
+            let content;
+
+            // If target is the header itself, use it directly
+            if (target.classList.contains('section-header')) {
+                header = target;
+                content = target.nextElementSibling;
+            } else {
+                // Otherwise, find the closest section header
+                header = target.closest('.section-header');
+                content = header?.nextElementSibling;
+            }
 
             if (!header || !content) {
                 console.warn('Section header or content not found');
@@ -182,15 +245,36 @@ class CVApp {
             }
 
             const isOpen = content.classList.contains('show');
-            const toggleIcon = header.querySelector('.toggle-icon');
 
             if (isOpen) {
-                this.closeSection(content, toggleIcon);
+                // Close this section only
+                this.closeSection(content);
             } else {
-                this.openSection(content, toggleIcon);
+                // Close all other sections first, then open this one
+                this.closeAllSections();
+                this.openSection(content);
             }
         } catch (error) {
             console.error('Error toggling section:', error);
+            // Fallback: try basic toggle
+            this.basicToggle(target);
+        }
+    }
+
+    basicToggle(target) {
+        // Simple fallback toggle without animations
+        let content;
+        if (target.classList.contains('section-header')) {
+            content = target.nextElementSibling;
+        } else {
+            const header = target.closest('.section-header');
+            content = header?.nextElementSibling;
+        }
+
+        if (content) {
+            const isVisible = content.style.display !== 'none';
+            content.style.display = isVisible ? 'none' : 'block';
+            content.style.maxHeight = isVisible ? '0' : 'none';
         }
     }
 
@@ -203,30 +287,38 @@ class CVApp {
 
             content.classList.add('show');
 
-            // Use a slight delay to ensure content is fully rendered
-            setTimeout(() => {
-                if (content && content.scrollHeight) {
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+                if (content && content.scrollHeight > 0) {
                     const scrollHeight = content.scrollHeight;
                     content.style.maxHeight = (scrollHeight + 50) + 'px'; // Add extra padding
 
-                    // Double-check after a longer delay for complex content like Skills
+                    // Double-check after content is fully rendered
                     setTimeout(() => {
                         this.ensureContentVisible(content);
-                    }, 100);
+                    }, 50);
+                } else {
+                    // Fallback for content without scrollHeight
+                    content.style.maxHeight = '2000px';
                 }
-            }, 10);
+            });
 
             if (toggleIcon) {
                 toggleIcon.style.transform = 'rotate(180deg)';
+                toggleIcon.setAttribute('aria-expanded', 'true');
             }
 
-            // Add active class to header
+            // Add active class to header and update ARIA attributes
             const header = content.previousElementSibling;
             if (header) {
                 header.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
             }
         } catch (error) {
             console.error('Error opening section:', error);
+            // Fallback: basic show
+            content.style.display = 'block';
+            content.style.maxHeight = '2000px';
         }
     }
 
@@ -242,15 +334,20 @@ class CVApp {
 
             if (toggleIcon) {
                 toggleIcon.style.transform = 'rotate(0deg)';
+                toggleIcon.setAttribute('aria-expanded', 'false');
             }
 
-            // Remove active class from header
+            // Remove active class from header and update ARIA attributes
             const header = content.previousElementSibling;
             if (header) {
                 header.classList.remove('active');
+                header.setAttribute('aria-expanded', 'false');
             }
         } catch (error) {
             console.error('Error closing section:', error);
+            // Fallback: basic hide
+            content.style.display = 'none';
+            content.style.maxHeight = '0';
         }
     }
 
@@ -258,24 +355,18 @@ class CVApp {
         const langToggle = document.getElementById('lang-toggle');
         if (!langToggle) return;
 
-        if (this.currentLanguage === 'es') {
-            this.currentLanguage = 'en';
-            langToggle.textContent = 'Español';
-            this.switchToEnglish();
+        // Determine current page and target language
+        const currentPath = window.location.pathname;
+        const isCurrentlyEnglish = currentPath.includes('index-en.html') || currentPath.endsWith('/en');
+
+        // Navigate to target language page
+        if (isCurrentlyEnglish) {
+            // Currently on English page, switch to Spanish
+            window.location.href = './index.html';
         } else {
-            this.currentLanguage = 'es';
-            langToggle.textContent = 'English';
-            this.switchToSpanish();
+            // Currently on Spanish page, switch to English
+            window.location.href = './index-en.html';
         }
-
-        // Save language preference
-        localStorage.setItem('cv-language', this.currentLanguage);
-
-        // Add animation effect
-        langToggle.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            langToggle.style.transform = 'scale(1)';
-        }, 150);
     }
 
     switchToEnglish() {
@@ -372,15 +463,23 @@ class CVApp {
 
     downloadPDF(language) {
         try {
+            // Sanitize input to prevent XSS
+            const sanitizedLanguage = String(language).toLowerCase().trim();
+            if (!['spanish', 'english'].includes(sanitizedLanguage)) {
+                console.error('Invalid language parameter:', language);
+                this.showErrorNotification('Parámetro de idioma inválido');
+                return;
+            }
+
             // PDF download functionality with error handling
             const pdfFiles = {
                 spanish: 'SalomónRamírezOrtega.CV.2.0.pdf_2025_9_8 (1).pdf',
                 english: 'SALOMON_RAMIREZ_ORTEGA_CV_ENG.PDF'
             };
 
-            const fileName = pdfFiles[language];
+            const fileName = pdfFiles[sanitizedLanguage];
             if (!fileName) {
-                console.error('PDF file not found for language:', language);
+                console.error('PDF file not found for language:', sanitizedLanguage);
                 this.showErrorNotification('Archivo PDF no encontrado');
                 return;
             }
@@ -508,29 +607,115 @@ class CVApp {
         }, 3000);
     }
 
-    // Utility methods
+    // Utility methods with performance optimizations and error handling
     debounce(func, wait) {
+        if (typeof func !== 'function') {
+            console.error('debounce: func must be a function');
+            return func;
+        }
+
         let timeout;
         return function executedFunction(...args) {
-            const later = () => {
+            try {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func.apply(this, args);
+                };
                 clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
+                timeout = setTimeout(later, wait);
+            } catch (error) {
+                console.error('Error in debounced function:', error);
+            }
         };
     }
 
     throttle(func, limit) {
+        if (typeof func !== 'function') {
+            console.error('throttle: func must be a function');
+            return func;
+        }
+
         let inThrottle;
         return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+            try {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            } catch (error) {
+                console.error('Error in throttled function:', error);
             }
+        }
+    }
+
+    // Performance monitoring with error handling
+    measurePerformance(name, fn) {
+        if (typeof name !== 'string' || typeof fn !== 'function') {
+            console.error('measurePerformance: name must be a string and fn must be a function');
+            return fn();
+        }
+
+        try {
+            const start = performance.now();
+            const result = fn();
+            const end = performance.now();
+            const duration = end - start;
+            console.log(`${name} took ${duration.toFixed(2)} milliseconds`);
+
+            // Warn if performance is poor
+            if (duration > 100) {
+                console.warn(`Performance warning: ${name} took ${duration.toFixed(2)}ms`);
+            }
+
+            return result;
+        } catch (error) {
+            console.error(`Error measuring performance for ${name}:`, error);
+            return fn(); // Fallback to running the function without measurement
+        }
+    }
+
+    // Lazy loading for non-critical features with error handling
+    lazyLoadFeature(featureName, featureFn) {
+        if (typeof featureName !== 'string' || typeof featureFn !== 'function') {
+            console.error('lazyLoadFeature: featureName must be a string and featureFn must be a function');
+            return;
+        }
+
+        try {
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            try {
+                                featureFn();
+                            } catch (error) {
+                                console.error(`Error in lazy-loaded feature ${featureName}:`, error);
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px' // Load 50px before element comes into view
+                });
+
+                const target = document.querySelector(`[data-lazy-${featureName}]`);
+                if (target) {
+                    observer.observe(target);
+                } else {
+                    console.warn(`Lazy load target [data-lazy-${featureName}] not found`);
+                }
+            } else {
+                // Fallback for older browsers
+                console.log(`IntersectionObserver not supported, running ${featureName} immediately`);
+                featureFn();
+            }
+        } catch (error) {
+            console.error(`Error setting up lazy loading for ${featureName}:`, error);
+            // Fallback: run the feature immediately
+            featureFn();
         }
     }
 
@@ -566,7 +751,7 @@ class CVApp {
         }
     }
 
-    // Safe external link handler
+    // Safe external link handler with cross-browser compatibility
     openExternalLink(url, target = '_blank') {
         try {
             if (!url || typeof url !== 'string') {
@@ -581,23 +766,40 @@ class CVApp {
                 return;
             }
 
-            // Create link with security attributes
+            // Cross-browser compatible way to open links
             const link = document.createElement('a');
             link.href = url;
             link.target = target;
-            link.rel = 'noopener noreferrer';
+
+            // Add security attributes for modern browsers
+            if ('rel' in link) {
+                link.rel = 'noopener noreferrer';
+            }
+
             link.style.display = 'none';
 
             // Add to DOM, click, and remove
             document.body.appendChild(link);
-            link.click();
+
+            // Use click() method with fallback for older browsers
+            if (link.click) {
+                link.click();
+            } else {
+                // Fallback for very old browsers
+                const event = document.createEvent('MouseEvents');
+                event.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                link.dispatchEvent(event);
+            }
+
             document.body.removeChild(link);
 
         } catch (error) {
             console.error('Error opening external link:', error);
             // Fallback: try opening in same window
             try {
-                window.location.href = url;
+                if (window.location && window.location.href) {
+                    window.location.href = url;
+                }
             } catch (fallbackError) {
                 console.error('Fallback navigation also failed:', fallbackError);
             }

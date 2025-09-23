@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Salomón Ramírez Ortega - Professional CV</title>
-    <meta name="description" content="Professional CV of Salomón Ramírez Ortega - Specialist in technology, digital marketing, cybersecurity and software development">
+    <meta name="description" content="<Professional CV of Salomón Ramírez Ortega - Specialist in technology, digital marketing, cybersecurity and software development">
     <meta name="keywords" content="Salomón Ramírez Ortega, CV, resume, technology, digital marketing, cybersecurity, web development, data analysis">
     <meta name="author" content="Salomón Ramírez Ortega">
     <meta name="robots" content="index, follow">
@@ -20,14 +20,59 @@
     <meta name="twitter:title" content="Salomón Ramírez Ortega - Professional CV">
     <meta name="twitter:description" content="Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development">
     <meta name="twitter:image" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/alex.png">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <link rel="canonical" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/en">
     <link rel="alternate" hreflang="en" href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/en">
     <link rel="alternate" hreflang="es" href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/">
-    <link rel="stylesheet" href="./styles.css">
+    <!-- Critical CSS inlined for better performance -->
+    <style>
+        /* Critical above-the-fold styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .cv-container { max-width: 1200px; margin: 0 auto; padding: 20px; background: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; margin-top: 20px; margin-bottom: 20px; }
+        .cv-header { background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; padding: 40px 30px; border-radius: 15px; margin-bottom: 30px; position: relative; }
+        .header-content { display: flex; align-items: center; gap: 30px; }
+        .profile-image img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid rgba(255, 255, 255, 0.3); object-fit: cover; }
+        .header-info h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .contact-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
+        .cv-section { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); margin-bottom: 30px; overflow: hidden; }
+        .section-header { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px 25px; cursor: pointer; display: flex; align-items: center; gap: 15px; }
+        .section-header h2 { flex: 1; font-size: 1.5rem; font-weight: 600; color: #2c3e50; }
+        .section-content { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .section-content.show { padding: 25px; max-height: 5000px; }
+        .download-section { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        .download-btn { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .cv-nav { background: #34495e; border-radius: 10px; margin-bottom: 30px; }
+        .cv-nav ul { list-style: none; display: flex; flex-wrap: wrap; padding: 0; margin: 0; }
+        .nav-link { display: flex; align-items: center; gap: 10px; padding: 15px 20px; color: white; text-decoration: none; font-weight: 500; }
+        @media (max-width: 768px) { .header-content { flex-direction: column; text-align: center; } .profile-image img { width: 120px; height: 120px; } .contact-info { grid-template-columns: 1fr; } .download-section { flex-direction: column; } .cv-nav ul { flex-direction: column; } }
+    </style>
+
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="./styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./styles.css"></noscript>
+
+    <!-- Resource hints for better performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./alex.png" as="image" type="image/png">
+
+    <!-- Font preloading for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Font Awesome loaded asynchronously -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- Fallback inline critical CSS for testing -->
     <style>
@@ -43,8 +88,8 @@
         .cv-section { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); margin-bottom: 30px; overflow: hidden; }
         .section-header { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px 25px; cursor: pointer; display: flex; align-items: center; gap: 15px; }
         .section-header h2 { flex: 1; font-size: 1.5rem; font-weight: 600; color: #2c3e50; }
-        .section-content { padding: 25px; max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
-        .section-content.show { max-height: 5000px; }
+        .section-content { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .section-content.show { padding: 25px; max-height: 5000px; }
         .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .skill-item { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
         .skill-bar { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
@@ -63,7 +108,7 @@
         <header class="cv-header">
             <div class="header-content">
                 <div class="profile-image">
-                    <img src="./alex.png" alt="Salomón Ramírez Ortega" onerror="this.src='https://via.placeholder.com/150x150/4a90e2/ffffff?text=SR'" loading="eager" decoding="sync" width="150" height="150">
+                    <img src="./alex.png" alt="Salomón Ramírez Ortega" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNGE5MGUyIiByeD0iNzUiLz4KPHRleHQgeD0iNzUiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5TUjwvdGV4dD4KPC9zdmc+'; this.style.background='linear-gradient(135deg, #4a90e2 0%, #357abd 100%)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontSize='3rem'; this.style.fontWeight='bold';" loading="eager" decoding="sync" width="150" height="150">
                 </div>
                 <div class="header-info">
                     <h1>Salomón Ramírez Ortega</h1>
@@ -93,55 +138,55 @@
                 </div>
             </div>
             <div class="language-toggle">
-                <button id="lang-toggle" class="lang-btn">Español</button>
+                <button id="lang-toggle" class="lang-btn" aria-label="Cambiar a versión en español" role="button">Español</button>
             </div>
         </header>
 
         <!-- Download Section -->
-        <div class="download-section">
-            <button class="download-btn" onclick="downloadPDF('spanish')">
-                <i class="fas fa-download"></i>
+        <div class="download-section" role="region" aria-label="Download CV options">
+            <button class="download-btn" onclick="downloadPDF('spanish')" aria-label="Download CV in Spanish (PDF format)">
+                <i class="fas fa-download" aria-hidden="true"></i>
                 Download CV in Spanish
             </button>
-            <button class="download-btn" onclick="downloadPDF('english')">
-                <i class="fas fa-download"></i>
+            <button class="download-btn" onclick="downloadPDF('english')" aria-label="Download CV in English (PDF format)">
+                <i class="fas fa-download" aria-hidden="true"></i>
                 Download CV in English
             </button>
         </div>
 
         <!-- Navigation -->
-        <nav class="cv-nav">
-            <ul>
-                <li><a href="#profile-en" class="nav-link"><i class="fas fa-user"></i> Professional Profile</a></li>
-                <li><a href="#experience-en" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a></li>
-                <li><a href="#education-en" class="nav-link"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                <li><a href="#skills-en" class="nav-link"><i class="fas fa-tools"></i> Skills</a></li>
-                <li><a href="#languages-en" class="nav-link"><i class="fas fa-language"></i> Languages</a></li>
+        <nav class="cv-nav" role="navigation" aria-label="CV sections navigation">
+            <ul role="list">
+                <li><a href="#profile-en" class="nav-link" aria-label="Go to Professional Profile section"><i class="fas fa-user" aria-hidden="true"></i> Professional Profile</a></li>
+                <li><a href="#experience-en" class="nav-link" aria-label="Go to Professional Experience section"><i class="fas fa-briefcase" aria-hidden="true"></i> Experience</a></li>
+                <li><a href="#education-en" class="nav-link" aria-label="Go to Education and Certifications section"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</a></li>
+                <li><a href="#skills-en" class="nav-link" aria-label="Go to Skills section"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
+                <li><a href="#languages-en" class="nav-link" aria-label="Go to Languages section"><i class="fas fa-language" aria-hidden="true"></i> Languages</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
-        <main class="cv-main">
+        <main class="cv-main" role="main">
             <!-- Professional Profile -->
-            <section id="profile-en" class="cv-section">
-                <div class="section-header">
-                    <i class="fas fa-user section-icon"></i>
-                    <h2>Professional Profile</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+            <section id="profile-en" class="cv-section" aria-labelledby="profile-en-title">
+                <div class="section-header" role="button" tabindex="0" aria-expanded="true" aria-controls="profile-en-content">
+                    <i class="fas fa-user section-icon" aria-hidden="true"></i>
+                    <h2 id="profile-en-title">Professional Profile</h2>
+                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
                 </div>
-                <div id="profile-en-content" class="section-content">
+                <div id="profile-en-content" class="section-content" aria-labelledby="profile-en-title" role="region">
                     <p>Multidisciplinary professional with experience in technology, digital marketing, cybersecurity, customer service, and project management. Currently transitioning to programming, data analysis, and software development through Oracle ONE Program.</p>
                 </div>
             </section>
 
             <!-- Professional Experience -->
             <section id="experience-en" class="cv-section">
-                <div class="section-header">
-                    <i class="fas fa-briefcase section-icon"></i>
-                    <h2>Professional Experience</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="experience-en-content">
+                    <i class="fas fa-briefcase section-icon" aria-hidden="true"></i>
+                    <h2 id="experience-en-title">Professional Experience</h2>
+                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
                 </div>
-                <div id="experience-en-content" class="section-content">
+                <div id="experience-en-content" class="section-content" aria-labelledby="experience-en-title">
                     <div class="experience-list">
                         <div class="experience-item">
                             <h3>Technology Advisor</h3>
@@ -209,12 +254,12 @@
 
             <!-- Education & Certifications -->
             <section id="education-en" class="cv-section">
-                <div class="section-header">
-                    <i class="fas fa-graduation-cap section-icon"></i>
-                    <h2>Education & Certifications</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="education-en-content">
+                    <i class="fas fa-graduation-cap section-icon" aria-hidden="true"></i>
+                    <h2 id="education-en-title">Education & Certifications</h2>
+                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
                 </div>
-                <div id="education-en-content" class="section-content">
+                <div id="education-en-content" class="section-content" aria-labelledby="education-en-title">
                     <div class="education-list">
                         <div class="education-item">
                             <h3>Oracle ONE Data Analyst Certification</h3>
@@ -259,12 +304,12 @@
 
             <!-- Skills -->
             <section id="skills-en" class="cv-section">
-                <div class="section-header">
-                    <i class="fas fa-tools section-icon"></i>
-                    <h2>Skills</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="skills-en-content">
+                    <i class="fas fa-tools section-icon" aria-hidden="true"></i>
+                    <h2 id="skills-en-title">Skills</h2>
+                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
                 </div>
-                <div id="skills-en-content" class="section-content">
+                <div id="skills-en-content" class="section-content" aria-labelledby="skills-en-title">
                     <div class="skills-container">
                         <div class="skills-category">
                             <h3>Technical Skills</h3>
@@ -334,12 +379,12 @@
 
             <!-- Languages -->
             <section id="languages-en" class="cv-section">
-                <div class="section-header">
-                    <i class="fas fa-language section-icon"></i>
-                    <h2>Languages</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="languages-en-content">
+                    <i class="fas fa-language section-icon" aria-hidden="true"></i>
+                    <h2 id="languages-en-title">Languages</h2>
+                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
                 </div>
-                <div id="languages-en-content" class="section-content">
+                <div id="languages-en-content" class="section-content" aria-labelledby="languages-en-title">
                     <div class="languages-list">
                         <div class="language-item">
                             <span class="language-name">Spanish</span>
@@ -359,7 +404,8 @@
         </main>
     </div>
 
-    <script src="./script.js"></script>
+    <!-- JavaScript loaded with defer for better performance -->
+    <script src="./script.js" defer></script>
 
     <!-- CSS Loading Debug Script -->
     <script>
