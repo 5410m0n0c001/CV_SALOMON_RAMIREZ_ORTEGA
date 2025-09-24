@@ -49,3 +49,6 @@ temp/
 # Backup files
 backup/
 -p/
+
+# Jekyll
+.jekyll-cache/

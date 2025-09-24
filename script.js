@@ -94,14 +94,29 @@ class CVApp {
 
   toggleLanguage() {
     const newLang = this.currentLang === 'es' ? 'en' : 'es';
-    const newPath = newLang === 'es' ? '/' : '/en';
+    const currentPath = window.location.pathname;
+    const isOnEnglishPage = currentPath.includes('/en') || currentPath.endsWith('-en.html');
     
     // Add transition effect
     document.body.style.opacity = '0.7';
     document.body.style.transform = 'scale(0.98)';
     
     setTimeout(() => {
-      window.location.href = newPath;
+      if (newLang === 'es') {
+        // Switch to Spanish
+        if (isOnEnglishPage) {
+          window.location.href = window.location.origin + window.location.pathname.replace('-en.html', '.html').replace('/en', '/');
+        } else {
+          window.location.href = window.location.origin + window.location.pathname.replace('index-en.html', 'index.html');
+        }
+      } else {
+        // Switch to English
+        if (isOnEnglishPage) {
+          window.location.href = window.location.origin + window.location.pathname.replace('.html', '-en.html');
+        } else {
+          window.location.href = window.location.origin + window.location.pathname.replace('index.html', 'index-en.html');
+        }
+      }
     }, 200);
   }
 
