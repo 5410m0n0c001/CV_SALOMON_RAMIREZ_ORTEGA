@@ -313,6 +313,107 @@ body {
   padding: var(--space-6);
 }
 
+/* Accordion Styles */
+.accordion-section {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--space-8);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.accordion-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.accordion-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: var(--space-6);
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.accordion-header:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.accordion-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: var(--font-size-sm);
+}
+
+.accordion-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.accordion-toggle:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordion-section.active .accordion-content {
+  max-height: 2000px; /* Large enough for any content */
+  opacity: 1;
+  padding: var(--space-6);
+}
+
+.accordion-section.active .accordion-toggle {
+  transform: rotate(180deg);
+}
+
+.accordion-section.active .accordion-toggle i {
+  transform: rotate(180deg);
+}
+
+/* Smooth animations for accordion content */
+.accordion-content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+
+.accordion-section.active .accordion-content > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibility improvements */
+.accordion-toggle[aria-expanded="true"] i::before {
+  content: "\f077"; /* chevron-up */
+}
+
+.accordion-toggle[aria-expanded="false"] i::before {
+  content: "\f078"; /* chevron-down */
+}
+
 /* Profile Details */
 .profile-details {
   display: grid;

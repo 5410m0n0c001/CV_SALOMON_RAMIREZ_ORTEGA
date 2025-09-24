@@ -29,6 +29,11 @@ class CVApp {
       link.addEventListener('click', (e) => this.handleNavClick(e));
     });
 
+    // Accordion toggles
+    document.querySelectorAll('.accordion-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => this.handleAccordionToggle(e));
+    });
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => this.handleKeydown(e));
 
@@ -146,14 +151,22 @@ class CVApp {
   }
 
   handleKeydown(e) {
-    // Escape key to close any open sections
+    // Escape key to close any open accordion sections
     if (e.key === 'Escape') {
-      document.querySelectorAll('.section.expanded').forEach(section => {
-        this.toggleSection(section, false);
+      document.querySelectorAll('.accordion-section.active').forEach(section => {
+        this.toggleAccordion(section, false);
+        const toggle = section.querySelector('.accordion-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
       });
     }
 
-    // Enter/Space on buttons
+    // Enter/Space on accordion toggles
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('accordion-toggle')) {
+      e.preventDefault();
+      this.handleAccordionToggle(e);
+    }
+
+    // Enter/Space on buttons (legacy support)
     if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('toggle-btn')) {
       e.preventDefault();
       this.toggleSection(e.target.closest('.section'));
@@ -162,7 +175,7 @@ class CVApp {
 
   handleDownload(e) {
     const link = e.currentTarget;
-    
+
     // Add download animation
     link.style.transform = 'scale(0.95)';
     setTimeout(() => {
@@ -174,6 +187,66 @@ class CVApp {
       gtag('event', 'download', {
         event_category: 'cv',
         event_label: link.href.includes('spanish') ? 'spanish' : 'english'
+      });
+    }
+  }
+
+  handleAccordionToggle(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const toggle = e.currentTarget;
+    const section = toggle.closest('.accordion-section');
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+    // Toggle the section
+    this.toggleAccordion(section, !isExpanded);
+
+    // Update ARIA attributes
+    toggle.setAttribute('aria-expanded', !isExpanded);
+
+    // Add visual feedback
+    toggle.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+      toggle.style.transform = '';
+    }, 100);
+  }
+
+  toggleAccordion(section, expand) {
+    const content = section.querySelector('.accordion-content');
+    const toggle = section.querySelector('.accordion-toggle');
+
+    if (expand) {
+      section.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+
+      // Animate content appearance
+      this.animateAccordionContent(content, true);
+    } else {
+      section.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+
+      // Animate content disappearance
+      this.animateAccordionContent(content, false);
+    }
+  }
+
+  animateAccordionContent(content, show) {
+    const children = content.children;
+
+    if (show) {
+      // Show content with staggered animation
+      Array.from(children).forEach((child, index) => {
+        setTimeout(() => {
+          child.style.opacity = '1';
+          child.style.transform = 'translateY(0)';
+        }, index * 50);
+      });
+    } else {
+      // Hide content immediately
+      Array.from(children).forEach(child => {
+        child.style.opacity = '0';
+        child.style.transform = 'translateY(-10px)';
       });
     }
   }
@@ -194,19 +267,29 @@ class CVApp {
   updateAriaLabels() {
     // Update ARIA labels based on current language
     const sections = {
-      profile: this.currentLang === 'es' ? 'Perfil Profesional' : 'Professional Profile',
-      experience: this.currentLang === 'es' ? 'Experiencia Profesional' : 'Professional Experience',
-      education: this.currentLang === 'es' ? 'Educación y Certificaciones' : 'Education & Certifications',
-      skills: this.currentLang === 'es' ? 'Habilidades' : 'Skills',
-      languages: this.currentLang === 'es' ? 'Idiomas' : 'Languages'
+      profile: this.currentLang === 'es' ? 'Perfil Profesional - Haz clic para expandir' : 'Professional Profile - Click to expand',
+      experience: this.currentLang === 'es' ? 'Experiencia Profesional - Haz clic para expandir' : 'Professional Experience - Click to expand',
+      education: this.currentLang === 'es' ? 'Educación y Certificaciones - Haz clic para expandir' : 'Education & Certifications - Click to expand',
+      skills: this.currentLang === 'es' ? 'Habilidades - Haz clic para expandir' : 'Skills - Click to expand',
+      languages: this.currentLang === 'es' ? 'Idiomas - Haz clic para expandir' : 'Languages - Click to expand'
     };
 
     Object.entries(sections).forEach(([id, label]) => {
       const section = document.getElementById(id);
       if (section) {
-        const heading = section.querySelector('h2');
+        const heading = section.querySelector('.accordion-header');
         if (heading) {
           heading.setAttribute('aria-label', label);
+        }
+
+        // Update toggle button labels
+        const toggle = section.querySelector('.accordion-toggle');
+        if (toggle) {
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          const toggleLabel = isExpanded
+            ? (this.currentLang === 'es' ? 'Colapsar sección' : 'Collapse section')
+            : (this.currentLang === 'es' ? 'Expandir sección' : 'Expand section');
+          toggle.setAttribute('aria-label', toggleLabel);
         }
       }
     });
