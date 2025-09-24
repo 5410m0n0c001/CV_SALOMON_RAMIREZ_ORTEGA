@@ -380,9 +380,10 @@ body {
 }
 
 .accordion-section.active .accordion-content {
-  max-height: 2000px; /* Large enough for any content */
   opacity: 1;
   padding: var(--space-6);
+  overflow-y: auto; /* Allow scrolling if content is too tall */
+  /* max-height will be set dynamically by JavaScript */
 }
 
 .accordion-section.active .accordion-toggle {
@@ -677,27 +678,92 @@ body {
   .profile h1 {
     font-size: var(--font-size-2xl);
   }
-  
+
   .profile p {
     font-size: var(--font-size-base);
   }
-  
+
   .contact-info {
     grid-template-columns: 1fr;
   }
-  
+
   .nav-list {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .section h2 {
     font-size: var(--font-size-lg);
     padding: var(--space-4);
   }
-  
+
   .content {
     padding: var(--space-4);
+  }
+
+  /* Accordion responsive styles */
+  .accordion-header {
+    font-size: var(--font-size-lg);
+    padding: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .accordion-toggle {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-xs);
+    flex-shrink: 0;
+  }
+
+  .accordion-section.active .accordion-content {
+    padding: var(--space-4);
+    /* max-height will be set dynamically by JavaScript */
+  }
+
+  /* Job listings responsive */
+  .job {
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .job h3 {
+    font-size: var(--font-size-base);
+  }
+
+  .job h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Skills responsive */
+  .skills-container {
+    gap: var(--space-4);
+  }
+
+  .skills-category {
+    padding: var(--space-3);
+  }
+
+  .skill {
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+  }
+
+  /* Certifications responsive */
+  .certifications-list {
+    gap: var(--space-3);
+  }
+
+  .cert {
+    padding: var(--space-3);
+  }
+
+  .cert h3 {
+    font-size: var(--font-size-base);
+  }
+
+  .cert h4 {
+    font-size: var(--font-size-sm);
   }
 }
 
@@ -705,23 +771,137 @@ body {
   .container {
     padding: 0 var(--space-3);
   }
-  
+
   .hero {
     padding: var(--space-8) 0;
   }
-  
+
   .profile-img {
     width: 120px;
     height: 120px;
   }
-  
+
   .downloads .container {
     gap: var(--space-3);
   }
-  
+
   .download-btn {
     padding: var(--space-3) var(--space-4);
     font-size: var(--font-size-sm);
+  }
+
+  /* Mobile accordion styles */
+  .accordion-header {
+    font-size: var(--font-size-base);
+    padding: var(--space-3);
+    min-height: 48px; /* Ensure touch target is large enough */
+  }
+
+  .accordion-toggle {
+    width: 24px;
+    height: 24px;
+    font-size: var(--font-size-xs);
+  }
+
+  .accordion-section.active .accordion-content {
+    padding: var(--space-3);
+    /* max-height will be set dynamically by JavaScript */
+  }
+
+  /* Mobile job listings */
+  .job {
+    padding: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .job h3 {
+    font-size: var(--font-size-sm);
+    line-height: 1.3;
+  }
+
+  .job h4 {
+    font-size: var(--font-size-xs);
+    line-height: 1.2;
+  }
+
+  .job ul {
+    padding-left: var(--space-3);
+  }
+
+  .job li {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-1);
+  }
+
+  /* Mobile skills */
+  .skills-category {
+    padding: var(--space-2);
+  }
+
+  .skill {
+    padding: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .skill-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .skill-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .skill-level {
+    font-size: var(--font-size-xs);
+    align-self: flex-end;
+  }
+
+  .skill-description {
+    font-size: var(--font-size-xs);
+  }
+
+  /* Mobile certifications */
+  .cert {
+    padding: var(--space-2);
+  }
+
+  .cert h3 {
+    font-size: var(--font-size-sm);
+    line-height: 1.3;
+  }
+
+  .cert h4 {
+    font-size: var(--font-size-xs);
+    line-height: 1.2;
+  }
+
+  .cert p {
+    font-size: var(--font-size-xs);
+  }
+
+  .cert-status {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+  }
+
+  /* Mobile languages */
+  .lang {
+    padding: var(--space-2);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .lang span:first-child {
+    font-weight: 600;
+  }
+
+  .level {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+    align-self: flex-end;
   }
 }
 

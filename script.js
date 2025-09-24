@@ -220,11 +220,18 @@ class CVApp {
       section.classList.add('active');
       toggle.setAttribute('aria-expanded', 'true');
 
+      // Calculate proper height for content
+      const scrollHeight = content.scrollHeight;
+      content.style.maxHeight = scrollHeight + 'px';
+
       // Animate content appearance
       this.animateAccordionContent(content, true);
     } else {
       section.classList.remove('active');
       toggle.setAttribute('aria-expanded', 'false');
+
+      // Reset height to 0 for smooth collapse
+      content.style.maxHeight = '0px';
 
       // Animate content disappearance
       this.animateAccordionContent(content, false);
