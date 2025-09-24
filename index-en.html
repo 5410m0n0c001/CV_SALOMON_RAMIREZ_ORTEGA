@@ -3,669 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Salomón Ramírez Ortega - Professional CV</title>
-    <meta name="description" content="Professional CV of Salomón Ramírez Ortega - Specialist in technology, digital marketing, cybersecurity and software development">
-    <meta name="keywords" content="Salomón Ramírez Ortega, CV, resume, technology, digital marketing, cybersecurity, web development, data analysis">
-    <meta name="author" content="Salomón Ramírez Ortega">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#4a90e2">
-    <meta name="format-detection" content="telephone=yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="CV - Salomón Ramírez Ortega">
-    <meta name="application-name" content="CV - Salomón Ramírez Ortega">
-    <meta name="msapplication-TileColor" content="#4a90e2">
-    <meta property="og:title" content="Salomón Ramírez Ortega - Professional CV">
-    <meta property="og:description" content="Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/en">
-    <meta property="og:image" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/alex.png">
-    <meta property="og:locale" content="en_US">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Salomón Ramírez Ortega - Professional CV">
-    <meta name="twitter:description" content="Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development">
-    <meta name="twitter:image" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/alex.png">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <link rel="canonical" content="https://cv-salomon-ramirez-ortega-clbp.vercel.app/en">
-    <link rel="alternate" hreflang="en" href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/en">
-    <link rel="alternate" hreflang="es" href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/">
-
-    <!-- Critical CSS inlined for better performance -->
-    <style>
-        /* Critical above-the-fold styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e3e7eb 100%);
-            min-height: 100vh;
-        }
-
-        .cv-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .cv-header {
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            color: white;
-            padding: 40px 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .profile-image {
-            flex-shrink: 0;
-        }
-
-        .profile-image img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            object-fit: cover;
-        }
-
-        .header-info h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-        }
-
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
-        }
-
-        .cv-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cv-section:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #ddd, transparent);
-        }
-
-        .section-header {
-          background: #155a96 !important; /* Blue background matching navigation */
-          color: #ffffff !important;
-          padding: 18px 22px;
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          cursor: pointer;
-          user-select: none;
-          transition: background 0.25s ease, transform 0.25s ease;
-        }
-
-        .section-header h2 {
-          margin: 0;
-          color: inherit;
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-
-        .section-header .toggle-icon {
-          margin-left: auto;
-          color: var(--white);
-          transition: transform 0.33s ease;
-        }
-        .section-header[aria-expanded="true"] .toggle-icon {
-          transform: rotate(180deg);
-        }
-
-        .section-content {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), padding 0.28s ease;
-          padding: 0 22px; /* only horizontal when collapsed */
-          background: #fff;
-          color: var(--text);
-        }
-        .section-content.open {
-          padding: 20px 22px;
-          max-height: 2000px; /* enough space for transition */
-        }
-
-        .download-section {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .cv-button {
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
-        }
-
-        .cv-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
-            background: linear-gradient(135deg, #357abd 0%, #2a5f8f 100%);
-        }
-
-        .cv-nav {
-          background: var(--primary-dark);
-          border-radius: 10px;
-          padding: 8px 12px;
-          margin-bottom: 30px;
-        }
-        .cv-nav ul {
-          display: flex;
-          gap: 12px;
-          justify-content: space-evenly; /* evenly distribute items */
-          align-items: center;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-        }
-        .cv-nav .nav-link {
-          display: block;
-          padding: 10px 12px;
-          color: var(--white);
-          text-decoration: none;
-          font-weight: 600;
-          text-align: center;
-          min-width: 100px;
-        }
-
-        .language-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile-image img {
-                width: 120px;
-                height: 120px;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-
-            .download-section {
-                flex-direction: column;
-            }
-
-            .cv-nav ul {
-                flex-direction: column;
-            }
-
-            .language-toggle {
-                position: static;
-                text-align: center;
-                margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cv-container {
-                margin: 10px;
-                padding: 15px;
-            }
-
-            .cv-header {
-                padding: 30px 20px;
-            }
-
-            .header-info h1 {
-                font-size: 2rem;
-            }
-
-            .section-header {
-                padding: 15px 20px;
-            }
-
-            .section-header h2 {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #4a90e2;
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            z-index: 1000;
-        }
-
-        .skip-link:focus {
-            top: 6px;
-        }
-
-        /* Print styles */
-        @media print {
-            body {
-                background: white;
-            }
-
-            .cv-container {
-                box-shadow: none;
-                margin: 0;
-            }
-
-            .language-toggle,
-            .download-section {
-                display: none;
-            }
-
-            .cv-header {
-                background: #f8f9fa;
-                color: #333;
-            }
-
-            .contact-item a {
-                color: #333;
-            }
-        }
-    </style>
-
-    <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/styles.css"></noscript>
-
-    <!-- Resource hints for better performance -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-
-    <!-- Preload critical resources -->
-    <link rel="preload" href="alex.png" as="image" type="image/png" fetchpriority="high">
-
-    <!-- Font preloading for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-
-    <!-- Font Awesome loaded asynchronously -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <meta name="description" content="Professional CV of Salomón Ramírez Ortega">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <div class="cv-container">
-        <!-- Header Section -->
-        <header class="cv-header">
-            <div class="header-content">
-                <div class="profile-image">
-                    <img src="/alex.png" alt="Salomón Ramírez Ortega - Professional Profile Photo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjNGE5MGUyIiByeD0iNzUiLz4KPHRleHQgeD0iNzUiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCIgZm9udC1mYW1pbHk9IkFyaWFsIj5TUjwvdGV4dD4KPC9zdmc+'; this.style.background='linear-gradient(135deg, #4a90e2 0%, #357abd 100%)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontSize='3rem'; this.style.fontWeight='bold';" loading="eager" decoding="async" width="150" height="150" fetchpriority="high">
-                </div>
-                <div class="header-info">
-                    <h1>Salomón Ramírez Ortega</h1>
-                    <p class="subtitle">Multidisciplinary Professional</p>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-phone" aria-hidden="true"></i>
-                            <a href="tel:+527772383264">+52 777 238 3264</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                            <a href="mailto:5410m0n.r4m1r3z@gmail.com">5410m0n.r4m1r3z@gmail.com</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            <a href="https://www.linkedin.com/in/salomon-ramirez-ortega-b8988a329/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile (opens in new tab)">LinkedIn</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fab fa-github" aria-hidden="true"></i>
-                            <a href="https://github.com/5410m0n0c001" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile (opens in new tab)">GitHub</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-globe" aria-hidden="true"></i>
-                            <a href="https://cv-salomon-ramirez-ortega-clbp.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit personal website (opens in new tab)">Website</a>
-                        </div>
-                    </div>
-                </div>
+    <header class="hero">
+        <div class="container">
+            <div class="profile">
+                <img src="alex.png" alt="Profile" class="profile-img">
+                <h1>Salomón Ramírez Ortega</h1>
+                <p>Multidisciplinary Professional</p>
             </div>
-            <div class="language-toggle">
-                <button onclick="window.location.href='index.html'" class="lang-btn" aria-label="Switch to Spanish version" role="button">Español</button>
+            <div class="contact-info">
+                <a href="tel:+527772383264" class="contact-link">
+                    <i class="fas fa-phone"></i> +52 777 238 3264
+                </a>
+                <a href="mailto:5410m0n.r4m1r3z@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://linkedin.com/in/salomon-ramirez-ortega-b8988a329" class="contact-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/5410m0n0c001" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
             </div>
-        </header>
-
-        <!-- Download Section -->
-        <div class="download-section" role="region" aria-label="Download CV options">
-            <button class="cv-button" onclick="downloadPDF('spanish')" aria-label="Download CV in Spanish (PDF format)">
-                <i class="fas fa-download" aria-hidden="true"></i>
-                Download CV in Spanish
-            </button>
-            <button class="cv-button" onclick="downloadPDF('english')" aria-label="Download CV in English (PDF format)">
-                <i class="fas fa-download" aria-hidden="true"></i>
-                Download CV in English
+            <button id="lang-toggle" class="lang-btn">
+                <i class="fas fa-globe"></i> Español
             </button>
         </div>
+    </header>
 
-        <!-- Navigation -->
-        <nav class="cv-nav" role="navigation" aria-label="CV sections navigation">
-            <ul role="list">
-                <li><a href="#profile-en" class="nav-link" aria-label="Go to Professional Profile section"><i class="fas fa-user" aria-hidden="true"></i> Professional Profile</a></li>
-                <li><a href="#experience-en" class="nav-link" aria-label="Go to Professional Experience section"><i class="fas fa-briefcase" aria-hidden="true"></i> Experience</a></li>
-                <li><a href="#education-en" class="nav-link" aria-label="Go to Education and Certifications section"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</a></li>
-                <li><a href="#skills-en" class="nav-link" aria-label="Go to Skills section"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
-                <li><a href="#languages-en" class="nav-link" aria-label="Go to Languages section"><i class="fas fa-language" aria-hidden="true"></i> Languages</a></li>
+    <section class="downloads">
+        <div class="container">
+            <a href="SalomónRamírezOrtega.CV.2.0.pdf_2025_9_8 (1).pdf" class="download-btn" download>
+                <i class="fas fa-download"></i> Download CV in Spanish
+            </a>
+            <a href="SALOMON_RAMIREZ_ORTEGA_CV_ENG.PDF" class="download-btn" download>
+                <i class="fas fa-download"></i> Download CV in English
+            </a>
+        </div>
+    </section>
+
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#profile" class="nav-link">Profile</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#languages" class="nav-link">Languages</a></li>
             </ul>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main id="main-content" class="cv-main" role="main">
-            <!-- Professional Profile -->
-            <section id="profile-en" class="cv-section" aria-labelledby="profile-en-title">
-                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="profile-en-content">
-                    <i class="fas fa-user section-icon" aria-hidden="true"></i>
-                    <h2 id="profile-en-title">Professional Profile</h2>
-                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                </div>
-                <div id="profile-en-content" class="section-content" aria-labelledby="profile-en-title" role="region">
-                    <p>Multidisciplinary professional with experience in technology, digital marketing, cybersecurity, customer service, and project management. Currently transitioning to programming, data analysis, and software development through Oracle ONE Program.</p>
-                </div>
-            </section>
-
-            <!-- Professional Experience -->
-            <section id="experience-en" class="cv-section">
-                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="experience-en-content">
-                    <i class="fas fa-briefcase section-icon" aria-hidden="true"></i>
-                    <h2 id="experience-en-title">Professional Experience</h2>
-                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                </div>
-                <div id="experience-en-content" class="section-content" aria-labelledby="experience-en-title">
-                    <div class="experience-list">
-                        <div class="experience-item">
-                            <h3>Technology Advisor</h3>
-                            <h4>Graduño Abogados</h4>
-                            <span class="period">2024 - Present</span>
+    <main class="main-content">
+        <div class="container">
+            <section id="profile" class="section">
+                <h2>Professional Profile</h2>
+                <div class="content">
+                    <p>Multidisciplinary professional with experience in technology, digital marketing, cybersecurity, customer service, and project management. I stand out for my adaptability, continuous learning, and leadership in multidisciplinary environments. Currently in active transition to programming, data analysis, and software development through Oracle ONE Program (Alura Latam + Oracle).</p>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+                            <span><strong>Age:</strong> 44 years</span>
                         </div>
-                        <div class="experience-item">
-                            <h3>Digital Marketing Manager</h3>
-                            <h4>Guayabita Consulting</h4>
-                            <span class="period">2024 - 2025</span>
+                        <div class="detail-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <span><strong>Phone:</strong> +52 777 238 3264</span>
                         </div>
-                        <div class="experience-item">
-                            <h3>Social Media & Web Project Coordinator</h3>
-                            <h4>All in One Cabo</h4>
-                            <span class="period">2022 - 2024</span>
+                        <div class="detail-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span><strong>Email:</strong> 5410m0n.r4m1r3z@gmail.com</span>
                         </div>
-                        <div class="experience-item">
-                            <h3>Customer Support Specialist</h3>
-                            <h4>Teleperformance (Comcast & Xfinity, USA)</h4>
-                            <span class="period">2025 - 2025</span>
+                        <div class="detail-item">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            <span><strong>LinkedIn:</strong> linkedin.com/in/salomon-ramirez-ortega-b8988a329</span>
                         </div>
-                        <div class="experience-item">
-                            <h3>Customer Service Representative</h3>
-                            <h4>Teleperformance (XOOM ENERGY USA)</h4>
-                            <span class="period">2024 - 2025</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Commercial Operations Manager</h3>
-                            <h4>Farmacias del Ahorro</h4>
-                            <span class="period">Previous period</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>VIP Host</h3>
-                            <h4>Splash, Los Cabos</h4>
-                            <span class="period">2015 - 2016</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Guest Butler</h3>
-                            <h4>Hard Rock, Los Cabos</h4>
-                            <span class="period">2014 - 2015</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Host, Waiter & Bartender</h3>
-                            <h4>Cabo Wabo, Los Cabos</h4>
-                            <span class="period">2008 - 2014</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Technology Promoter</h3>
-                            <h4>Hisense</h4>
-                            <span class="period">2021 - 2022</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Pharmacist</h3>
-                            <h4>RMC Pharmacy, BCS</h4>
-                            <span class="period">2019 - 2021</span>
-                        </div>
-                        <div class="experience-item">
-                            <h3>Operations Manager/Coordinator</h3>
-                            <h4>Comercializadora Farmacéutica de Chiapas</h4>
-                            <span class="period">2000 - 2008</span>
+                        <div class="detail-item">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span><strong>Website:</strong> salomonramirezortega.quantumdigitalgroup.net</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Education & Certifications -->
-            <section id="education-en" class="cv-section">
-                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="education-en-content">
-                    <i class="fas fa-graduation-cap section-icon" aria-hidden="true"></i>
-                    <h2 id="education-en-title">Education & Certifications</h2>
-                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
+            <section id="experience" class="section">
+                <h2>Professional Experience</h2>
+                <div class="content">
+                    <div class="job">
+                        <h3>Technology Advisor</h3>
+                        <h4>Graduño Abogados</h4>
+                        <span>2024 – Present</span>
+                        <ul>
+                            <li>Implementation of technological solutions to optimize legal processes</li>
+                            <li>Support in computer security, risk analysis, and training in digital tools</li>
+                            <li>Integration of document management systems and protection of sensitive data</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Digital Marketing Manager</h3>
+                        <h4>Guayabita Consulting</h4>
+                        <span>2024 – 2025</span>
+                        <ul>
+                            <li>Leadership of digital strategies (SEO/SEM, social media, email marketing)</li>
+                            <li>Analysis of metrics to optimize campaigns and maximize ROI</li>
+                            <li>Collaboration with creative teams in designing conversion-oriented content</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Social Media & Web Project Coordinator</h3>
+                        <h4>All in One Cabo</h4>
+                        <span>2022 – 2024</span>
+                        <ul>
+                            <li>Management of social media strategies and digital campaigns for the premium tourism sector</li>
+                            <li>Development and maintenance of websites for tourism service promotion</li>
+                            <li>Coordination of digital projects achieving a 40% increase in online bookings</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Customer Support Specialist</h3>
+                        <h4>Teleperformance (Comcast & Xfinity, USA)</h4>
+                        <span>2025 – 2025</span>
+                        <ul>
+                            <li>Customer service to US clients in telecommunications services</li>
+                            <li>Resolution of technical issues related to TV, Internet, and telephony services</li>
+                            <li>Training and support for new agents to optimize service quality</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Customer Service Representative</h3>
+                        <h4>Teleperformance (XOOM ENERGY USA)</h4>
+                        <span>2024 – 2025</span>
+                        <ul>
+                            <li>Customer service across multiple channels (chat, phone, email)</li>
+                            <li>Resolution of technical issues and after-sales support</li>
+                            <li>Maintenance of high customer satisfaction standards (NPS > 85%)</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Commercial Operations Manager</h3>
+                        <h4>Farmacias del Ahorro</h4>
+                        <span>Previous period</span>
+                        <ul>
+                            <li>Supervision of commercial operations and achievement of sales goals</li>
+                            <li>Inventory management, personnel control, and compliance with health regulations</li>
+                            <li>Implementation of sales strategies and customer service</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>VIP Host</h3>
+                        <h4>Splash, Los Cabos</h4>
+                        <span>2015 – 2016</span>
+                        <ul>
+                            <li>Personalized service to VIP clients and coordination of exclusive experiences</li>
+                            <li>Organization of private events and coordination of premium services</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Guest Butler</h3>
+                        <h4>Hard Rock, Los Cabos</h4>
+                        <span>2014 – 2015</span>
+                        <ul>
+                            <li>Personalized service to VIP guests</li>
+                            <li>Coordination of reservations, transportation, and exclusive experiences</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Host, Waiter & Bartender</h3>
+                        <h4>Cabo Wabo, Los Cabos</h4>
+                        <span>2008 – 2014</span>
+                        <ul>
+                            <li>Service to international clients in a high-volume environment</li>
+                            <li>Drink preparation and bar coordination</li>
+                            <li>Participation in organizing themed events and brand promotion</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Technology Promoter</h3>
+                        <h4>Hisense</h4>
+                        <span>2021 – 2022</span>
+                        <ul>
+                            <li>Demonstration and sale of electronic products at points of sale</li>
+                            <li>Customer training in the use of smart devices</li>
+                            <li>30% increase in sales through engagement strategies</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Pharmacist</h3>
+                        <h4>RMC Pharmacy, BCS</h4>
+                        <span>2019 – 2021</span>
+                        <ul>
+                            <li>Dispensing medications and patient counseling</li>
+                            <li>Inventory management and compliance with health regulations</li>
+                            <li>Collaboration in community health campaigns</li>
+                        </ul>
+                    </div>
+                    <div class="job">
+                        <h3>Operations Manager/Coordinator</h3>
+                        <h4>Comercializadora Farmacéutica de Chiapas</h4>
+                        <span>2000 – 2008</span>
+                        <ul>
+                            <li>Supervision of logistics and supply chain of medical products</li>
+                            <li>Implementation of automated inventory systems</li>
+                            <li>15% reduction in operating costs through process optimization</li>
+                        </ul>
+                    </div>
                 </div>
-                <div id="education-en-content" class="section-content" aria-labelledby="education-en-title">
-                    <div class="education-list">
-                        <div class="education-item">
+            </section>
+
+            <section id="education" class="section">
+                <h2>Education & Certifications</h2>
+                <div class="content">
+                    <div class="certifications-list">
+                        <div class="cert">
                             <h3>Oracle ONE Data Analyst Certification</h3>
-                            <span class="period">In progress, 2025</span>
+                            <span class="cert-status in-progress">In progress, 2025</span>
+                            <p>Specialization in data analysis and business intelligence</p>
                         </div>
-                        <div class="education-item">
-                            <h3>Programming Beginner - Oracle ONE</h3>
-                            <p>Programming Logic, Git/GitHub, HTML, CSS, JavaScript, Challenge-Based Learning, Generative AI</p>
-                            <span class="period">In progress, 2025</span>
+                        <div class="cert">
+                            <h3>Programming Beginner Training - Oracle ONE</h3>
+                            <span class="cert-status in-progress">In progress, 2025</span>
+                            <p>Programming Logic, Git/GitHub, HTML, CSS, JavaScript, Challenge-Based Learning, Generative Artificial Intelligence</p>
                         </div>
-                        <div class="education-item">
+                        <div class="cert">
                             <h3>Computer Science Certification - Harvard CS50</h3>
-                            <span class="period">In progress, 2024</span>
+                            <span class="cert-status in-progress">In progress, 2024</span>
+                            <p>Fundamentals of computer science</p>
                         </div>
-                        <div class="education-item">
-                            <h3>Defensive Military Cybersecurity - DARFE</h3>
-                            <span class="period">In progress, 2024</span>
+                        <div class="cert">
+                            <h3>Defensive Military Cybersecurity Certification - DARFE</h3>
+                            <span class="cert-status in-progress">In progress, 2024</span>
+                            <p>Specialization in defensive cybersecurity</p>
                         </div>
-                        <div class="education-item">
+                        <div class="cert">
                             <h3>Laptop Repair Technician</h3>
                             <h4>Carlos Slim Foundation</h4>
-                            <span class="period">2021</span>
+                            <span class="cert-status completed">2021</span>
+                            <p>Certification in maintenance and repair of portable equipment</p>
                         </div>
-                        <div class="education-item">
+                        <div class="cert">
                             <h3>Cybersecurity Risk Analyst</h3>
                             <h4>Carlos Slim Foundation</h4>
-                            <span class="period">2020</span>
+                            <span class="cert-status completed">2020</span>
+                            <p>Methodologies for analysis and management of cyber risks</p>
                         </div>
-                        <div class="education-item">
+                        <div class="cert">
                             <h3>Computer Science Degree</h3>
                             <h4>UTEZ</h4>
-                            <span class="period">Incomplete, 1999 - 2000</span>
+                            <span class="cert-status incomplete">Incomplete, 1999 – 2000</span>
+                            <p>University studies in information technology</p>
                         </div>
-                        <div class="education-item">
+                        <div class="cert">
                             <h3>High School</h3>
                             <h4>INEA</h4>
-                            <span class="period">1997 - 1998</span>
+                            <span class="cert-status completed">1997 – 1998</span>
+                            <p>Completed secondary education</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Skills -->
-            <section id="skills-en" class="cv-section">
-                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="skills-en-content">
-                    <i class="fas fa-tools section-icon" aria-hidden="true"></i>
-                    <h2 id="skills-en-title">Skills</h2>
-                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                </div>
-                <div id="skills-en-content" class="section-content" aria-labelledby="skills-en-title">
+            <section id="skills" class="section">
+                <h2>Skills</h2>
+                <div class="content">
                     <div class="skills-container">
                         <div class="skills-category">
-                            <h3>Technical Skills</h3>
-                            <div class="skill-list">
-                                <div class="skill-item">
-                                    <span>Digital Marketing (SEO, SEM, Social Media, Email)</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                            <h3><i class="fas fa-laptop-code" aria-hidden="true"></i> Hard Skills</h3>
+                            <div class="skills-list">
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Digital Marketing</span>
+                                        <span class="skill-level">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 85%"></div>
+                                    </div>
+                                    <p class="skill-description">SEO, SEM, Social Media, Email Marketing</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Web Development (WordPress, HTML, CSS)</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Web Development</span>
+                                        <span class="skill-level">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 75%"></div>
+                                    </div>
+                                    <p class="skill-description">WordPress, HTML, CSS, programming logic, Git/GitHub</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Programming Logic, Git/GitHub</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 35%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Data & AI</span>
+                                        <span class="skill-level">25%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 25%"></div>
+                                    </div>
+                                    <p class="skill-description">Data analysis, generative AI, Prompt Engineering</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Data Analysis, Generative AI</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 25%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Cybersecurity</span>
+                                        <span class="skill-level">30%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 30%"></div>
+                                    </div>
+                                    <p class="skill-description">Risk analysis, defensive cybersecurity</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Cybersecurity (Risk Analysis)</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 30%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Project Management</span>
+                                        <span class="skill-level">70%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 70%"></div>
+                                    </div>
+                                    <p class="skill-description">Team coordination, strategic planning, KPIs</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Project Management</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <span>3D Design</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 40%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <span>Customer Service</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <span>Technical Support</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <span>Graphic Design</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 55%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <span>Video Editing</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 50%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Multimedia Content</span>
+                                        <span class="skill-level">55%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 55%"></div>
+                                    </div>
+                                    <p class="skill-description">Photo and video production, digital material</p>
                                 </div>
                             </div>
                         </div>
                         <div class="skills-category">
-                            <h3>Soft Skills</h3>
-                            <div class="skill-list">
-                                <div class="skill-item">
-                                    <span>Leadership and team management</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+                            <h3><i class="fas fa-users" aria-hidden="true"></i> Soft Skills</h3>
+                            <div class="skills-list">
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Leadership</span>
+                                        <span class="skill-level">95%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 95%"></div>
+                                    </div>
+                                    <p class="skill-description">Team management</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Problem-solving and critical thinking</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Problem Solving</span>
+                                        <span class="skill-level">90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%"></div>
+                                    </div>
+                                    <p class="skill-description">Critical thinking</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Effective communication and collaborative work</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Communication</span>
+                                        <span class="skill-level">90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%"></div>
+                                    </div>
+                                    <p class="skill-description">Collaborative work</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Adaptability and continuous learning</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Adaptability</span>
+                                        <span class="skill-level">95%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 95%"></div>
+                                    </div>
+                                    <p class="skill-description">Continuous learning</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Creativity and innovation</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Creativity</span>
+                                        <span class="skill-level">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 85%"></div>
+                                    </div>
+                                    <p class="skill-description">Innovation</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span>Results-oriented and pressure management</span>
-                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                                <div class="skill">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Results Orientation</span>
+                                        <span class="skill-level">90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%"></div>
+                                    </div>
+                                    <p class="skill-description">Pressure management</p>
                                 </div>
                             </div>
                         </div>
@@ -673,88 +405,29 @@
                 </div>
             </section>
 
-            <!-- Languages -->
-            <section id="languages-en" class="cv-section">
-                <div class="section-header" role="button" tabindex="0" aria-expanded="false" aria-controls="languages-en-content">
-                    <i class="fas fa-language section-icon" aria-hidden="true"></i>
-                    <h2 id="languages-en-title">Languages</h2>
-                    <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                </div>
-                <div id="languages-en-content" class="section-content" aria-labelledby="languages-en-title">
-                    <div class="languages-list">
-                        <div class="language-item">
-                            <span class="language-name">Spanish</span>
-                            <span class="language-level">Native</span>
-                        </div>
-                        <div class="language-item">
-                            <span class="language-name">English</span>
-                            <span class="language-level">Advanced</span>
-                        </div>
-                        <div class="language-item">
-                            <span class="language-name">Russian</span>
-                            <span class="language-level">Beginner</span>
-                        </div>
+            <section id="languages" class="section">
+                <h2>Languages</h2>
+                <div class="content">
+                    <div class="lang">
+                        <span>🇲🇽 Spanish</span> <span class="level">Native</span>
+                    </div>
+                    <div class="lang">
+                        <span>🇺🇸 English</span> <span class="level">Advanced</span>
+                    </div>
+                    <div class="lang">
+                        <span>🇷🇺 Russian</span> <span class="level">Beginner</span>
                     </div>
                 </div>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
 
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Salomón Ramírez Ortega",
-      "alternateName": "Salomon Ramirez Ortega",
-      "description": "Multidisciplinary professional with experience in technology, digital marketing, cybersecurity and software development",
-      "image": "https://cv-salomon-ramirez-ortega-clbp.vercel.app/alex.png",
-      "url": "https://cv-salomon-ramirez-ortega-clbp.vercel.app/en",
-      "sameAs": [
-        "https://www.linkedin.com/in/salomon-ramirez-ortega-b8988a329/",
-        "https://github.com/5410m0n0c001/CV_SALOMON_RAMIREZ_ORTEGA",
-        "https://salomonramirezortega.quantumdigitalgroup.net"
-      ],
-      "jobTitle": "Technology Advisor",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Graduño Abogados"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "MX",
-        "addressRegion": "Morelos"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+52-777-238-3264",
-        "email": "5410m0n.r4m1r3z@gmail.com",
-        "contactType": "professional"
-      },
-      "knowsAbout": [
-        "Digital Marketing",
-        "Cybersecurity",
-        "Web Development",
-        "Data Analysis",
-        "Programming",
-        "Project Management"
-      ],
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Technology Professional",
-        "occupationLocation": {
-          "@type": "City",
-          "name": "Cuernavaca, Morelos, Mexico"
-        }
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "UTEZ"
-      }
-    }
-    </script>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Salomón Ramírez Ortega</p>
+        </div>
+    </footer>
 
-    <!-- JavaScript loaded with defer for better performance -->
-    <script src="/script.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

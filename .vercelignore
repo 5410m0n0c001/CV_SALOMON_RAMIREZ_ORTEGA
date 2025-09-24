@@ -4,78 +4,48 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Development files
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
-# OS generated files
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
-# Git
-.git/
-.gitignore
+# Logs
+logs/
+*.log
 
-# Environment files
+# Runtime
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Logs
-logs/
-*.log
-
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# Build outputs (we'll handle this with Vite)
+# Build outputs (if any)
 dist/
 build/
+.next/
+out/
 
-# Temporary folders
-tmp/
-temp/
-
-# Vercel
-.vercel/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# IDE files
-.vscode/settings.json
-.idea/
-
-# Local development
-*.local
+# Cache
+.cache/
+.parcel-cache/
 
 # Testing
 coverage/
 .nyc_output/
 
-# Editor directories and files
-!.vscode/extensions.json
-.history/*
+# Documentation
+docs/
 
-# Vercel specific
-.vercel
-.vercelignore
+# Temporary files
+tmp/
+temp/
+
+# Backup files
+backup/
+-p/
