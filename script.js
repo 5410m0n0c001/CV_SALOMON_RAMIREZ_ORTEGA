@@ -113,12 +113,10 @@ class CVApp {
 
   toggleLanguage() {
     const newLang = this.currentLang === 'es' ? 'en' : 'es';
-    const baseUrl = 'https://5410m0n0c001.github.io/CV_SALOMON_RAMIREZ_ORTEGA';
 
     console.log('🔄 Language toggle clicked');
     console.log('Current language:', this.currentLang);
     console.log('New language:', newLang);
-    console.log('Base URL:', baseUrl);
 
     // Add transition effect
     document.body.style.opacity = '0.7';
@@ -127,12 +125,12 @@ class CVApp {
     setTimeout(() => {
       if (newLang === 'es') {
         // Switch to Spanish - always go to root index.html
-        console.log('🌐 Switching to Spanish:', baseUrl + '/');
-        window.location.href = baseUrl + '/';
+        console.log('🌐 Switching to Spanish: /');
+        window.location.href = '/';
       } else {
         // Switch to English - go to index-en.html
-        console.log('🌐 Switching to English:', baseUrl + '/index-en.html');
-        window.location.href = baseUrl + '/index-en.html';
+        console.log('🌐 Switching to English: /index-en.html');
+        window.location.href = '/index-en.html';
       }
     }, 200);
   }
@@ -426,15 +424,19 @@ if (document.readyState === 'loading') {
   PerformanceMonitor.measurePageLoad();
 }
 
-// Service Worker registration for PWA capabilities
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('✅ Service Worker registered:', registration);
-      })
-      .catch(error => {
-        console.log('❌ Service Worker registration failed:', error);
-      });
-  });
-}
+// Service Worker registration removed for GitHub Pages compatibility
+
+// Test image loading
+document.addEventListener('DOMContentLoaded', () => {
+  const profileImage = document.querySelector('.profile-image');
+  if (profileImage) {
+    const img = new Image();
+    img.onload = () => {
+      console.log('✅ Profile image loaded successfully');
+    };
+    img.onerror = () => {
+      console.error('❌ Profile image failed to load');
+    };
+    img.src = profileImage.src;
+  }
+});
