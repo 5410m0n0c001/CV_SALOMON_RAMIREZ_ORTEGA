@@ -6,7 +6,8 @@ class CVApp {
   }
 
   detectLanguage() {
-    return window.location.pathname.includes('/en') ? 'en' : 'es';
+    const path = window.location.pathname;
+    return path.includes('index-en.html') || path.includes('/en') ? 'en' : 'es';
   }
 
   init() {
@@ -34,11 +35,24 @@ class CVApp {
       toggle.addEventListener('click', (e) => this.handleAccordionToggle(e));
     });
 
+    // Accordion headers (make entire header clickable)
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', (e) => {
+        // Don't trigger if clicking on the toggle button itself
+        if (!e.target.classList.contains('accordion-toggle') && !e.target.closest('.accordion-toggle')) {
+          const toggle = header.querySelector('.accordion-toggle');
+          if (toggle) {
+            this.handleAccordionToggle({ target: toggle });
+          }
+        }
+      });
+    });
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => this.handleKeydown(e));
 
     // Download buttons
-    document.querySelectorAll('.download-btn').forEach(btn => {
+    document.querySelectorAll('.cv-button').forEach(btn => {
       btn.addEventListener('click', (e) => this.handleDownload(e));
     });
   }
@@ -99,28 +113,26 @@ class CVApp {
 
   toggleLanguage() {
     const newLang = this.currentLang === 'es' ? 'en' : 'es';
-    const currentPath = window.location.pathname;
-    const isOnEnglishPage = currentPath.includes('/en') || currentPath.endsWith('-en.html');
-    
+    const baseUrl = 'https://5410m0n0c001.github.io/CV_SALOMON_RAMIREZ_ORTEGA';
+
+    console.log('🔄 Language toggle clicked');
+    console.log('Current language:', this.currentLang);
+    console.log('New language:', newLang);
+    console.log('Base URL:', baseUrl);
+
     // Add transition effect
     document.body.style.opacity = '0.7';
     document.body.style.transform = 'scale(0.98)';
-    
+
     setTimeout(() => {
       if (newLang === 'es') {
-        // Switch to Spanish
-        if (isOnEnglishPage) {
-          window.location.href = window.location.origin + window.location.pathname.replace('-en.html', '.html').replace('/en', '/');
-        } else {
-          window.location.href = window.location.origin + window.location.pathname.replace('index-en.html', 'index.html');
-        }
+        // Switch to Spanish - always go to root index.html
+        console.log('🌐 Switching to Spanish:', baseUrl + '/');
+        window.location.href = baseUrl + '/';
       } else {
-        // Switch to English
-        if (isOnEnglishPage) {
-          window.location.href = window.location.origin + window.location.pathname.replace('.html', '-en.html');
-        } else {
-          window.location.href = window.location.origin + window.location.pathname.replace('index.html', 'index-en.html');
-        }
+        // Switch to English - go to index-en.html
+        console.log('🌐 Switching to English:', baseUrl + '/index-en.html');
+        window.location.href = baseUrl + '/index-en.html';
       }
     }, 200);
   }
@@ -128,20 +140,24 @@ class CVApp {
   handleNavClick(e) {
     const link = e.currentTarget;
     const href = link.getAttribute('href');
-    
+
     if (href.startsWith('#')) {
       e.preventDefault();
       const target = document.querySelector(href);
-      
+
       if (target) {
         // Add active state
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-        
-        // Smooth scroll
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+
+        // Calculate position accounting for sticky navigation
+        const navHeight = document.querySelector('.navigation')?.offsetHeight || 0;
+        const targetPosition = target.offsetTop - navHeight - 20; // 20px extra padding
+
+        // Smooth scroll to position
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
         });
 
         // Update URL without jumping
@@ -305,7 +321,7 @@ class CVApp {
   animateOnLoad() {
     // Animate elements on page load
     setTimeout(() => {
-      document.querySelectorAll('.profile-img').forEach(img => {
+      document.querySelectorAll('.profile-image').forEach(img => {
         img.style.transform = 'scale(1)';
         img.style.opacity = '1';
       });
@@ -319,6 +335,17 @@ class CVApp {
         }, index * 100);
       });
     }, 300);
+
+    // Update language toggle button text
+    this.updateLanguageButton();
+  }
+
+  updateLanguageButton() {
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      const buttonText = this.currentLang === 'es' ? 'English' : 'Español';
+      langToggle.innerHTML = `<i class="fas fa-globe"></i> ${buttonText}`;
+    }
   }
 
   // Utility methods
