@@ -14,7 +14,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "Alex.png",
+      "src": "alex.png",
       "use": "@vercel/static"
     },
     {
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "source": "/Alex.png",
+      "source": "/alex.png",
       "headers": [
         {
           "key": "Cache-Control",
