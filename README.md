@@ -1,4 +1,4 @@
-# Salomón Ramírez Ortega - Professional CV
+# Salomón Ramírez Ortega - Apasionado por los nuevos desafíos y proyectos que integran tecnología, creatividad y aprendizaje continuo
 
 A modern, interactive, and bilingual CV website built with HTML, CSS, and JavaScript, optimized for production deployment on Vercel with comprehensive performance, security, and accessibility enhancements.
 
